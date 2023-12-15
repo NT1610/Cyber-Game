@@ -1,0 +1,14 @@
+.login-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #3498db;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button.light {
+    background-color: #5DADE2;
+    z-index: 2;
+  }
+  
