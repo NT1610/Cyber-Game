@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import {Point} from './Component/Point';
 import Test from './Component/test';
 import MultipleItemsSlider from './Component/test2';
-
+import ImageInfo from './Component/Info';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +18,8 @@ root.render(
     <Point />
     <Point/>
     <Test/>
-    <MultipleItemsSlider/>
+    {/* <MultipleItemsSlider/> */}
+    <ImageInfo></ImageInfo>
 
 
     

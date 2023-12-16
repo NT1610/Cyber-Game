@@ -25,7 +25,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
   display: flex;
-  background-image: url("./image/background/back2.jpg");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; 

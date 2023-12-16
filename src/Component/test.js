@@ -3,6 +3,9 @@ import '../css/test.css';
 
 const Component1 = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const [showCaption, setShowCaption] = useState(false);
+    const [showAdditionalCaption, setShowAdditionalCaption] = useState(false);
+
 
     const handleMouseOver = () => {
       setIsHovered(true);
@@ -11,18 +14,33 @@ const Component1 = () => {
     const handleMouseOut = () => {
       setIsHovered(false);
     };
+
   return (
     <div className="component1">
         <img 
         src="https://thumbs.vikingscyber.com/1440x829/vk-assets/media/438/highlight/MAEr7uJ3vUafz2OnzGfFIw.jpg"
         // class="image"  
         className={isHovered ? "image brighten" : "image"}
+        alt="Description of the image"
+        onMouseEnter={() => {
+          setShowCaption(true);
+          setShowAdditionalCaption(true);
+        }}
+        onMouseLeave={() => {
+          setShowCaption(false);
+          setShowAdditionalCaption(false);
+        }}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}/>
-        <div class="text">BÁNH BAO</div>
+        {showCaption &&<p id='cap'>BÁNH BAO</p>        
+        }
+        {showAdditionalCaption && (
+        <p id='cap2'>GIÁ CHỈ 20K</p>
+      )}
     </div>
   );
 };
+
 
 const Component2 = () => {
     const [isHovered, setIsHovered] = useState(false);

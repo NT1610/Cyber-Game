@@ -21,10 +21,10 @@
     width: 100%;
     height: auto;
     transition: filter 0.3s; /* Thêm transition cho hiệu ứng */
-    filter: brightness(80%)
+    filter: brightness(100%)
   }
   .brighten {
-    filter: brightness(100%); /* Điều chỉnh độ sáng của ảnh */
+    filter: brightness(80%); /* Điều chỉnh độ sáng của ảnh */
   }
   
   .text {
@@ -35,5 +35,25 @@
     font-size: 24px;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     padding: 10px 20px;
+  }
+
+  #cap{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px; /* Thay đổi cỡ chữ thành 20px */
+  }
+  
+  #cap2{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    font-size: 20px; /* Thay đổi cỡ chữ thành 20px */
+    color: yellow;
   }
   
