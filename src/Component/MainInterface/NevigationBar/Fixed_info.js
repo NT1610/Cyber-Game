@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import "../css/button.css";
-import "../css/all.css";
+import "./button.css";
+import "./all.css";
 
 const PopupList = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -11,7 +11,9 @@ const PopupList = () => {
 
   return (
     <div>
-      <button onClick={togglePopup}>Show List</button>
+      <button className='login-button' onClick={togglePopup}>
+      <i class="fa fa-bars"></i>
+      </button>
       {showPopup && (
         <div className="popup-container">
           <div className="popup-overlay" onClick={togglePopup}></div>
@@ -28,9 +30,11 @@ const PopupList = () => {
   );
 };
 
-const Info = () => {
+const Bar = () => {
 
   const [isLight, setIsLight] = useState(false);
+  const [isBlack, setIsBlack] = useState(false);
+
 
   const handleMouseOver = () => {
     setIsLight(true);
@@ -39,12 +43,15 @@ const Info = () => {
   const handleMouseOut = () => {
     setIsLight(false);
   };
-  const [isBlack, setIsBlack] = useState(false);
 
   const changeBackgroundColor = () => {
     setIsBlack(!isBlack);
     document.body.style.backgroundColor = isBlack ? 'white' : 'black';
   };
+
+
+
+
 
   return (
     <div className="fixed"
@@ -59,16 +66,22 @@ const Info = () => {
 
     }}
    >
-     <button onClick={changeBackgroundColor}
-    className={`login-button ${isLight ? 'light' : ''}`}
-    onMouseOver={handleMouseOver}
-    onMouseOut={handleMouseOut}
+
+     <button id='sun' onClick={changeBackgroundColor}
+    className='login-button'
     style={{
       position: 'flex',
       top: '0px',
-      right: '0px',}}
-    >Change Background Color
+      right: '0px',
+      backgroundColor: isBlack ?  '#323286' : 'rgb(225, 196, 66)' 
+    }}
+    >
+
+    <i class="fa fa-sharp fa-light fa-sun fa-xl" style={{color:'#323286', }}></i>
+    <i class="fa fa-sharp fa-light fa-moon fa-xl" style={{color: isBlack ? 'rgb(225, 196, 66)' : 'transparent'}}></i>
+
      </button> 
+
 
        <button
       className={`login-button ${isLight ? 'light' : ''}`}
@@ -88,4 +101,4 @@ const Info = () => {
   );
 };
 
-export {Info};
+export {Bar};

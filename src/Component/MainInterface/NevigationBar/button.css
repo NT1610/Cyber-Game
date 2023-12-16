@@ -1,0 +1,29 @@
+.login-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #323286;
+    color: #fff;
+    transition: background-color 0.3s;
+    border-radius: 10px; /* Tạo viền cong với bán kính 10px */
+
+  }
+  
+ .login-button.light {
+    background-color: rgb(225, 196, 66);
+    z-index: 2;
+  }
+  #sun{
+    position: absolute;
+    right: 100;
+    margin-right: 90px;
+    width: 50px; /* Độ rộng của vòng tròn */
+    height: 50px; /* Chiều cao của vòng tròn */
+    border-radius: 50%; /* Đặt border-radius thành 50% để tạo thành hình tròn */
+  }
+  #sun i{
+    position: absolute; /* Set the position of the icon to absolute */
+    top: 50%; /* Position the icon 50% from the top of the block */
+    left: 50%; /* Position the icon 50% from the left of the block */
+    transform: translate(-50%, -50%); /* Center the icon within the block */
+  }

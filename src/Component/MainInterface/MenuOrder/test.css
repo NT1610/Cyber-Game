@@ -15,13 +15,12 @@
   }
   
 .image {
-    width: 100%; /* Set the width of the image to fill its container */
-    height: auto; /* Maintain aspect ratio */
+    height: 800px; /* Maintain aspect ratio */
     border: none; /* Remove the border */
     width: 100%;
-    height: auto;
     transition: filter 0.3s; /* Thêm transition cho hiệu ứng */
-    filter: brightness(100%)
+    filter: brightness(100%);
+    object-fit: cover; /* Cắt ảnh để lấp đầy phần hiển thị mà không bị bóp */
   }
   .brighten {
     filter: brightness(80%); /* Điều chỉnh độ sáng của ảnh */
@@ -44,7 +43,7 @@
     transform: translate(-50%, -50%);
     padding: 10px;
     font-family: 'Roboto', sans-serif;
-    font-size: 30px; /* Thay đổi cỡ chữ thành 20px */
+    font-size: 40px; /* Thay đổi cỡ chữ thành 20px */
   }
   
   #cap2{
@@ -53,7 +52,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 10px;
-    font-size: 20px; /* Thay đổi cỡ chữ thành 20px */
+    font-size: 30px; /* Thay đổi cỡ chữ thành 20px */
     color: yellow;
+    font-weight: bold;
+
   }
   

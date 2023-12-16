@@ -1,28 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {Info} from './Component/Fixed_info';
+import {Bar} from './Component/MainInterface/NevigationBar/Fixed_info';
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Point} from './Component/Point';
-import Test from './Component/test';
-import MultipleItemsSlider from './Component/test2';
-import ImageInfo from './Component/Info';
+// import {Point} from './Component/Point';
+import Menu from './Component/MainInterface/MenuOrder/Menu';
+// import MultipleItemsSlider from './Component/test2';
+import ImageInfo from './Component/MainInterface/Info/Info';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Info/>
+    <Bar/>
     <App />
-    <Point />
-    <Point/>
-    <Test/>
+    {/* <Point /> */}
+    {/* <Point/> */}
+    <Menu/>
     {/* <MultipleItemsSlider/> */}
-    <ImageInfo></ImageInfo>
-
-
-    
+    <ImageInfo></ImageInfo>    
   </React.StrictMode>
 );
 

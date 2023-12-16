@@ -1,5 +1,5 @@
 .imageInfo{
-    background-image: url("../image/background/back2.jpg");
+    background-image: url("./image/background/back2.jpg");
     text-align: center;
     display: flex;
     height: 700px;
@@ -11,6 +11,35 @@
 }
 .info{
     right: 0;
+    position: absolute;
+    transform: translateY(70%); /* Dịch chuyển phần tử p lên trên để căn giữa */    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px; /* Thay đổi cỡ chữ thành 20px */
+    color: rgb(210, 146, 26); /* Thay đổi màu chữ thành màu xanh */
+    display: inline-block;
+    width: 50%;
+
+}
+.imageInfo1{
+    background-image: url("./image/background/back1.jpg");
+    text-align: center;
+    display: flex;
+    height: 700px;
+    width: 50%;
+    left: 50%;
+    top: 0;
+    display: inline-block;
+    right: 0;
+    position: relative;
+    background-repeat: no-repeat;
+
+}
+.info1{
+    left: 0;
     position: absolute;
     transform: translateY(70%); /* Dịch chuyển phần tử p lên trên để căn giữa */    text-align: center;
     display: flex;
