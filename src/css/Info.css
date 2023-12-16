@@ -1,0 +1,42 @@
+.imageInfo{
+    background-image: url("../image/background/back2.jpg");
+    text-align: center;
+    display: flex;
+    height: 700px;
+    width: 50%;
+    left: 50%;
+    top: 0;
+    display: inline-block;
+
+}
+.info{
+    right: 0;
+    position: absolute;
+    transform: translateY(70%); /* Dịch chuyển phần tử p lên trên để căn giữa */    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px; /* Thay đổi cỡ chữ thành 20px */
+    color: rgb(210, 146, 26); /* Thay đổi màu chữ thành màu xanh */
+    display: inline-block;
+    width: 50%;
+
+}
+#un{
+    font-family: 'Dinamo Regular', sans-serif;
+
+    font-size: 40px; /* Thay đổi cỡ chữ thành 20px */
+    color: rgb(0, 0, 0); /* Thay đổi màu chữ thành màu xanh */
+    font-weight: bold;
+}
+#sc{
+    font-family: 'Dinamo Regular', sans-serif;
+
+    font-size: 20px; /* Thay đổi cỡ chữ thành 20px */
+    color: rgb(192, 184, 184); /* Thay đổi màu chữ thành màu xanh */
+    font-weight: bold;
+
+
+}
