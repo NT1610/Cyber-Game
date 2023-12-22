@@ -55,11 +55,11 @@ class Computer(MyBaseModel):
 class Employee(MyBaseModel):
     accountID: int
     name: str
-    birth: str
+    birth: date
     id: str
     phone: str
     position: str
-    salary: int
+    salary: float
 
 
 class Work(MyBaseModel):

@@ -55,7 +55,7 @@ class Area(Base):
 
 class Employee(Base):
     __tablename__ = "employee"
-    employeeID = Column(Integer, primary_key=True)
+    employeeID = Column(Integer, primary_key=True, autoincrement=True)
     accountID = Column(Integer, ForeignKey("account.accountID"))
     name = Column(String)
     birth = Column(Date)
