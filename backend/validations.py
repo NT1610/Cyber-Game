@@ -83,4 +83,5 @@ class Token(MyBaseModel):
 
 
 class TokenData(MyBaseModel):
-    username: Optional[str] = None
+    accountID: Optional[str] = None
+    role: str

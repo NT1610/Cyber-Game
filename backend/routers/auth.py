@@ -1,10 +1,9 @@
-from fastapi import FastAPI, status, Depends, HTTPException, Form
-from fastapi.responses import HTMLResponse
-from validations import Login, Account
-from typing import List
+from fastapi import status, Depends, HTTPException
+from fastapi.security.oauth2 import OAuth2PasswordRequestForm
+from validations import Login
 from fastapi import APIRouter
 from database import Session_local
-import models, auth2
+import models, oauth2
 from hashing import Hash
 
 db = Session_local()
@@ -29,7 +28,7 @@ def login(request: Login):
             status_code=status.HTTP_404_NOT_FOUND, detail="Invalid password"
         )
 
-    access_token = auth2.create_access_token(
-        data={"account": db_account.account, "role": db_account.role}
+    access_token = oauth2.create_access_token(
+        data={"account": db_account.accountID, "role": db_account.role}
     )
     return {"access_token": access_token, "token_type": "bearer"}
