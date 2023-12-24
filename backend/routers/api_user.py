@@ -4,12 +4,13 @@ from validations import UserInfo
 from typing import List
 from fastapi import APIRouter
 from repository import user_services
+import oauth2, models
 
 router = APIRouter(prefix="/user", tags=["user"])
 
 
 @router.get("/userinfo/{user_id}", response_model=UserInfo, status_code=200)
-async def read_userinfo(user_id: int):
+async def read_userinfo(user_id: int, current_user: models.Account = Depends(oauth2.get_current_user)):
     return user_services.get_user_by_id(user_id)
 
 

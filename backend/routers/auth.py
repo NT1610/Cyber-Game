@@ -12,10 +12,10 @@ router = APIRouter(tags=["Authentication"])
 
 
 @router.post("/login")
-def login(request: Login):
+def login(request: OAuth2PasswordRequestForm = Depends()):
     db_account = (
         db.query(models.Account)
-        .filter(models.Account.account == request.account)
+        .filter(models.Account.account == request.username)
         .first()
     )
     if not db_account:
