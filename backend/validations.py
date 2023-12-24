@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import date, time, datetime
-
+from typing import Optional
 
 class MyBaseModel(BaseModel):
     class Config:
@@ -12,14 +12,17 @@ class Account(MyBaseModel):
     password: str
     role: str
 
+class Account_out(MyBaseModel):
+    account: str
+    role: str
 
 class UserInfo(MyBaseModel):
-    name: str
     accountID: int
+    name: str
     birth: date
     id: str
-    phone = str
-    money = float
+    phone: str
+    money: float
 
 
 class Receipt(MyBaseModel):
@@ -67,3 +70,17 @@ class Work(MyBaseModel):
     status: str
     startTime: datetime
     endTime: datetime
+
+
+class Login(MyBaseModel):
+    account: str
+    password: str
+
+
+class Token(MyBaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(MyBaseModel):
+    username: Optional[str] = None
