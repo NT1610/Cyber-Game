@@ -77,6 +77,7 @@ def __check_exception(employee: Employee):
         )
         .filter(
             or_(
+                models.Account.role == "User",
                 models.Account.accountID == employee.accountID,
                 models.Employee.id == employee.id,
                 models.Employee.phone == employee.phone,
@@ -102,7 +103,7 @@ def __check_exception_exclude_self(original: models.Employee, employee: Employee
                 models.Account.accountID == employee.accountID,
                 models.Employee.id == employee.id,
                 models.Employee.phone == employee.phone,
-            ), # ngoai le tru ban than ra.
+            ),
         )
         .first()
     )

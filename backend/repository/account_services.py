@@ -2,7 +2,7 @@ from fastapi import FastAPI, status, Depends, HTTPException
 from database import Session_local
 from validations import Account
 from typing import List
-import models
+import models, hashing
 
 db = Session_local()
 
@@ -14,7 +14,7 @@ def read_account():
 def create_account(account: Account):
     new_account = models.Account(
         account=account.account,
-        password=account.password,
+        password=hashing.Hash.bcrypt(account.password),
         role=account.role,
     )
 
@@ -54,7 +54,7 @@ def update_account(account_id: int, account: Account):
         )
 
     db_account.account = account.account
-    db_account.password = account.password
+    db_account.password = hashing.Hash.bcrypt(account.password)
     db_account.role = account.role
 
     db.commit()

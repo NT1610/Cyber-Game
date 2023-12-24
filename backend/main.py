@@ -1,8 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from passlib.context import CryptContext
-from pydantic import BaseModel
-import api_admin
+from routers import api_admin, auth
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -17,3 +14,5 @@ app.add_middleware(
 )
 
 app.include_router(api_admin.router)
+app.include_router(auth.router)
+
