@@ -1,15 +1,15 @@
-from fastapi import FastAPI, status, Depends, HTTPException
+from fastapi import status, Depends, HTTPException
 from database import Session_local
 from validations import Account
-from typing import List
 import models, hashing
-
 db = Session_local()
 
 
 def read_account():
     return db.query(models.Account).all()
 
+def read_account_id(accountID: int):
+    return db.query(models.Account).filter(models.Account.accountID == accountID).first()
 
 def create_account(account: Account):
     new_account = models.Account(

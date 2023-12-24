@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import api_admin, auth
+from routers import api_admin, auth, api_user
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -15,4 +15,6 @@ app.add_middleware(
 
 app.include_router(api_admin.router)
 app.include_router(auth.router)
+app.include_router(api_user.router)
+
 

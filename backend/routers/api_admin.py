@@ -13,20 +13,20 @@ async def read_account():
     return account_services.read_account()
 
 
-@router.post("/account", response_model=Account, status_code=status.HTTP_201_CREATED)
+@router.post("/account", response_model=Account_out, status_code=status.HTTP_201_CREATED)
 async def create_account(account: Account):
     return account_services.create_account(account)
 
 
 @router.put(
-    "/account/{account_id}", response_model=Account, status_code=status.HTTP_200_OK
+    "/account/{account_id}", response_model=Account_out, status_code=status.HTTP_200_OK
 )
 async def update_account(account_id: int, account: Account):
     return account_services.update_account(account_id, account)
 
 
 @router.delete(
-    "/account/{account_id}", response_model=Account, status_code=status.HTTP_200_OK
+    "/account/{account_id}", response_model=Account_out, status_code=status.HTTP_200_OK
 )
 async def delete_account(account_id: int):
     return account_services.delete_account(account_id)
