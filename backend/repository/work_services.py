@@ -23,7 +23,7 @@ def create_work(work: Work):
         .first()
     )
     if db_work is None:
-        raise HTTPException(status_code=400, detail="Invalid!")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="employeeID is required")
 
     new_work = models.Work(
         employeeID=work.employeeID,
@@ -39,7 +39,7 @@ def create_work(work: Work):
 def update_work(workID: int, work: Work):
     db_work = db.query(models.Work).filter(models.Work.workID == workID).first()
     if db_work is None:
-        raise Exception(status_code=400, detail="Work not found")
+        raise Exception(status_code= status.HTTP_404_NOT_FOUND, detail="workID not found")
 
     db_work.employeeID = work.employeeID
     db_work.status = work.status

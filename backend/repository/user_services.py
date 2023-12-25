@@ -15,7 +15,7 @@ def read_userinfo():
 def get_user_by_id(user_id):
     temp = db.query(models.UserInfo).filter(models.UserInfo.userID == user_id).first()
     if temp is None:
-        raise HTTPException(status_code=404)
+        raise HTTPException(status=status.HTTP_404_NOT_FOUND, detail=f"User {user_id} not found")
 
     return temp
 

@@ -12,7 +12,7 @@ def read_employee():
     return db.query(models.Employee).all()
 
 
-def get_employee_by_id(e_id):
+def get_employee_by_id(e_id: int):
     temp = db.query(models.Employee).filter(models.Employee.employeeID == e_id).first()
     if temp is None:
         raise HTTPException(status_code=404)
@@ -77,7 +77,6 @@ def __check_exception(employee: Employee):
         )
         .filter(
             or_(
-                models.Account.role == "User",
                 models.Account.accountID == employee.accountID,
                 models.Employee.id == employee.id,
                 models.Employee.phone == employee.phone,
@@ -109,4 +108,4 @@ def __check_exception_exclude_self(original: models.Employee, employee: Employee
     )
 
     if db_employee is not None:
-        raise HTTPException(status_code=400, detail="Invalid!")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid!")
