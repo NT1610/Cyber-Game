@@ -1,6 +1,6 @@
 from fastapi import FastAPI, status, Depends, HTTPException, Form
 from fastapi.responses import HTMLResponse
-from validations import UserInfo, Order, Computer, Receipt, Connect
+from validations import UserInfo, Order, Computer, Receipt, Connect, Area
 from validations import Order_out, UserInfo_out, Computer_out
 from typing import List
 from fastapi import APIRouter
@@ -9,6 +9,7 @@ from repository import (
     order_services,
     computer_services,
     receipt_services,
+    area_services,
 )
 import oauth2, models
 
@@ -56,7 +57,9 @@ async def create_order(
     return order_services.create_order(order)
 
 
-@router.get("/computer", response_model=List[Computer_out], status_code=status.HTTP_200_OK)
+@router.get(
+    "/computer", response_model=List[Computer_out], status_code=status.HTTP_200_OK
+)
 async def read_computer():
     return computer_services.read_computer()
 
@@ -66,3 +69,13 @@ async def update_computer(comID: int, connect: Connect, computer: Computer):
     return computer_services.update_computer(
         comID=comID, connect=connect, computer=computer
     )
+
+
+@router.get("/area", response_model=List[Area], status_code=status.HTTP_200_OK)
+async def read_area():
+    return area_services.read_area()
+
+
+@router.get("/area/{area_id}", response_model=Area, status_code=status.HTTP_200_OK)
+async def read_area(area_id: str):
+    return area_services.read_area_id(area_id)

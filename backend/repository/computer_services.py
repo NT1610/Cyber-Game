@@ -43,16 +43,21 @@ def create_computer(computer: Computer):
 
 def update_computer(comID: int, connect: Connect | None, computer: Computer):
     db_computer = read_computer_id(comID)
-
-    db_computer.status = computer.status
     allowed_statuses = ["ON", "OFF", "BROKEN"]
 
     if connect is not None:
+        if computer.status == allowed_statuses[2]:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST, detail="Computer is BROKEN"
+            )
+
+        db_computer.status = computer.status
         if db_computer.status == allowed_statuses[0]:
             connect_services.create_connect(connect)
         elif db_computer.status == allowed_statuses[1]:
             connect_services.delete_connect(comID)
     else:
+        db_computer.status = computer.status
         db_computer.area = computer.area
 
     db.commit()

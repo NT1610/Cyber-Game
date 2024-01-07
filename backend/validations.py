@@ -94,6 +94,7 @@ class Computer_out(MyBaseModel):
 
 
 class Area(MyBaseModel):
+    area: str
     price: int
 
 
