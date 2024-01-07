@@ -8,7 +8,6 @@ from sqlalchemy import (
     ForeignKey,
     Float,
     Date,
-    Time,
     TIMESTAMP,
 )
 
@@ -44,7 +43,7 @@ class Connect(Base):
     tmp = Column(Integer, primary_key=True)
     userID = Column(Integer, ForeignKey("userinfo.userID"))
     comID = Column(Integer, ForeignKey("computer.comID"))
-    startTime = Column(Time)
+    startTime = Column(TIMESTAMP)
 
 
 class Area(Base):
@@ -79,7 +78,7 @@ class Menu(Base):
     foodID = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     price = Column(Float)
-
+    quantity = Column(Integer)
 
 class Storage(Base):
     __tablename__ = "storage"
@@ -112,7 +111,7 @@ class Receipt(Base):
     userID = Column(Integer, ForeignKey("userinfo.userID"))
     description = Column(String)
     money = Column(Integer)
-    time = Column(Time)
+    time = Column(TIMESTAMP)
 
 
 def create_DB():

@@ -1,6 +1,6 @@
 from fastapi import status, Depends, HTTPException
 from database import Session_local
-from validations import Receipt
+from validations import Receipt, Receipt_out
 import models
 
 db = Session_local()
@@ -12,27 +12,23 @@ def read_receipt():
 
 def read_receipt_id(receipt_id: int):
     temp = (
-        db.query(models.UserInfo).filter(models.Receipt.receiptID == receipt_id).first()
+        db.query(models.Receipt).filter(models.Receipt.receiptID == receipt_id).first()
     )
     if temp is None:
         raise HTTPException(
-            status=status.HTTP_404_NOT_FOUND, detail=f"Receipt {receipt_id} not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Receipt {receipt_id} not found"
         )
     return temp
 
 
 def create_receipt(receipt: Receipt):
     db_user = (
-        db.query(models.UserInfo())
-        .join(
-            models.Receipt,
-            onclause= models.Receipt.userID == models.Receipt.userID
-        )
-        .filter(models.Receipt.userID == Receipt.userID)
+        db.query(models.UserInfo)
+        .filter(models.UserInfo.userID == receipt.userID)
         .first()
     )
 
-    if db_user is not None:
+    if db_user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="userID is not found")
     
     new_receipt = models.Receipt(

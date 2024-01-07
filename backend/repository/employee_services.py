@@ -56,16 +56,16 @@ def update_employee(employee_id: int, employee: Employee):
 
 
 def delete_employee(employee_id):
-    db_employee = (
+    employee_to_delete = (
         db.query(models.Employee)
         .filter(models.Employee.employeeID == employee_id)
         .first()
     )
-    if db_employee is None:
-        raise Exception(status=status.HTTP_404_NOT_FOUND, detail="Employee not found")
-    db.delete(db_employee)
+    if employee_to_delete is None:
+        raise Exception(status_code=status.HTTP_404_NOT_FOUND, detail="Employee not found")
+    db.delete(employee_to_delete)
     db.commit()
-    return db_employee
+    return employee_to_delete
 
 
 def __check_exception(employee: Employee):

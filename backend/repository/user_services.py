@@ -2,7 +2,7 @@ from fastapi import FastAPI, status, Depends, HTTPException
 from database import Session_local
 from validations import UserInfo
 from typing import List
-import models
+import models, hashing
 from sqlalchemy import or_, and_
 
 db = Session_local()
@@ -15,7 +15,9 @@ def read_userinfo():
 def get_user_by_id(user_id):
     temp = db.query(models.UserInfo).filter(models.UserInfo.userID == user_id).first()
     if temp is None:
-        raise HTTPException(status=status.HTTP_404_NOT_FOUND, detail=f"User {user_id} not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"User {user_id} not found"
+        )
 
     return temp
 
@@ -37,19 +39,19 @@ def create_userinfo(userInfo: UserInfo):
 
 
 def update_userinfo(userInfo_id: int, userInfo: UserInfo):
-    db_usser = get_user_by_id(userInfo_id)
-    __check_exception_exclude_self(original=db_usser, user=userInfo)
+    db_user = get_user_by_id(userInfo_id)
+    __check_exception_exclude_self(original=db_user, user=userInfo)
 
-    db_usser.accountID = userInfo.accountID
-    db_usser.name = userInfo.name
-    db_usser.birth = userInfo.birth
-    db_usser.id = userInfo.id
-    db_usser.phone = userInfo.phone
-    db_usser.money = userInfo.money
+    db_user.accountID = userInfo.accountID
+    db_user.name = userInfo.name
+    db_user.birth = userInfo.birth
+    db_user.id = userInfo.id
+    db_user.phone = userInfo.phone
+    db_user.money = userInfo.money
 
     db.commit()
 
-    return db_usser
+    return db_user
 
 
 def delete_userinfo(userInfo_id):
@@ -58,7 +60,7 @@ def delete_userinfo(userInfo_id):
     )
 
     if db_user is None:
-        raise Exception(status=status.HTTP_404_NOT_FOUND, detail="User not found")
+        raise Exception(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return db_user
 
 

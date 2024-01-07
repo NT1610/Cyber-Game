@@ -1,30 +1,32 @@
-from fastapi import status, Depends
-from validations import Account, Employee, Work, UserInfo, Receipt, Order, Computer, Connect
+from fastapi import FastAPI, status, Depends, HTTPException, Form
+from fastapi.responses import HTMLResponse
+from validations import (
+    Account,
+    Employee,
+    Work,
+    UserInfo,
+    Receipt,
+    Order,
+    Computer,
+    Connect,
+)
 from validations import Account_out, Receipt_out, UserInfo_out, Order_out, Computer_out
 from typing import List
 from fastapi import APIRouter
 from repository import (
     account_services,
-    employee_services,
-    work_services,
     user_services,
     receipt_services,
     order_services,
-    computer_services
+    computer_services,
 )
-import models, oauth2
 
-router = APIRouter(prefix="/admin", tags=["admins"])
-
-# @router.get("/account", response_model=List[Account_out], status_code=200)
-# async def read_account(current_user: models.Account = Depends(oauth2.get_current_user)):
-#     # if(current_user.role != "Admin"):
-#     return account_services.read_account()
+router = APIRouter(prefix="/employee", tags=["employee"])
 
 
 @router.get("/account", response_model=List[Account_out], status_code=200)
 async def read_account():
-    return account_services.read_account()
+    return account_services.read_account_user()
 
 
 @router.post(
@@ -46,55 +48,6 @@ async def update_account(account_id: int, account: Account):
 )
 async def delete_account(account_id: int):
     return account_services.delete_account(account_id)
-
-
-@router.get("/employee", response_model=List[Employee], status_code=200)
-async def read_employee():
-    return employee_services.read_employee()
-
-
-@router.get("/employee/{e_id}", response_model=Employee, status_code=200)
-async def read_employee(e_id: int):
-    return employee_services.get_employee_by_id(e_id)
-
-
-@router.post("/employee", response_model=Employee, status_code=status.HTTP_201_CREATED)
-async def create_employee(employee: Employee):
-    return employee_services.create_employee(employee)
-
-
-@router.put("/employee/{employee_id}", response_model=Employee, status_code=200)
-async def update_employee(employee_id: int, employee: Employee):
-    return employee_services.update_employee(employee_id, employee)
-
-
-@router.delete(
-    "/employee/{employee_id}", response_model=Employee, status_code=status.HTTP_200_OK
-)
-async def delete_employee(employee_id):
-    return employee_services.delete_employee(employee_id)
-
-
-@router.get("/work", response_model=List[Work], status_code=status.HTTP_200_OK)
-async def read_work():
-    return work_services.read_work()
-
-
-@router.post("/work", response_model=Work, status_code=status.HTTP_201_CREATED)
-async def create_work(work: Work):
-    return work_services.create_work(work)
-
-
-@router.put("/work/{workID}", response_model=Work, status_code=status.HTTP_200_OK)
-async def update_work(workID: int, work: Work):
-    return work_services.update_work(workID, work)
-
-
-@router.get(
-    "/userinfo/", response_model=List[UserInfo_out], status_code=status.HTTP_200_OK
-)
-async def read_user():
-    return user_services.read_userinfo()
 
 
 @router.get("/userinfo/{user_id}", response_model=UserInfo_out, status_code=200)
@@ -128,13 +81,6 @@ async def delete_user(userInfo_id: int):
 
 
 @router.get(
-    "/reciept", response_model=List[Receipt_out], status_code=status.HTTP_200_OK
-)
-async def read_reciept():
-    return receipt_services.read_receipt()
-
-
-@router.get(
     "/reciept/{reciept_ID}", response_model=Receipt_out, status_code=status.HTTP_200_OK
 )
 async def read_reciept(reciept_ID: int):
@@ -146,11 +92,6 @@ async def read_reciept(reciept_ID: int):
 )
 async def create_reciept(receipt: Receipt):
     return receipt_services.create_receipt(receipt)
-
-
-@router.get("/order", response_model=Order, status_code=status.HTTP_200_OK)
-async def read_order_id(order_id):
-    return order_services.read_order(order_id)
 
 
 @router.get("/order/{oder_id}", response_model=Order, status_code=status.HTTP_200_OK)
@@ -173,13 +114,24 @@ async def update_order(orderID: int):
     return order_services.delete_order(orderID)
 
 
-@router.get("/computer", response_model=List[Computer_out], status_code=status.HTTP_200_OK)
+@router.get(
+    "/computer", response_model=List[Computer_out], status_code=status.HTTP_200_OK
+)
 async def read_computer():
     return computer_services.read_computer()
 
 
-@router.put("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)
+@router.put(
+    "/computer/connect", response_model=Computer_out, status_code=status.HTTP_200_OK
+)
 async def update_computer(comID: int, connect: Connect, computer: Computer):
     return computer_services.update_computer(
         comID=comID, connect=connect, computer=computer
+    )
+
+
+@router.put("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)
+async def update_computer(comID: int, computer: Computer):
+    return computer_services.update_computer(
+        comID=comID, connect=None, computer=computer
     )
