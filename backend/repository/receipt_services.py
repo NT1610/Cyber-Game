@@ -16,7 +16,8 @@ def read_receipt_id(receipt_id: int):
     )
     if temp is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=f"Receipt {receipt_id} not found"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Receipt {receipt_id} not found",
         )
     return temp
 
@@ -29,13 +30,15 @@ def create_receipt(receipt: Receipt):
     )
 
     if db_user is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="userID is not found")
-    
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="userID is not found"
+        )
+
     new_receipt = models.Receipt(
-        userID = receipt.userID,
-        description = receipt.description,
-        money = receipt.money,
-        time = receipt.time
+        userID=receipt.userID,
+        description=receipt.description,
+        money=receipt.money,
+        time=receipt.time,
     )
 
     db.add(new_receipt)

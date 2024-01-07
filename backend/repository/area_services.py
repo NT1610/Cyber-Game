@@ -25,7 +25,8 @@ def create_area(area: Area):
 
     if db_area is not None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=f"Area {area.area} is available"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Area {area.area} is available",
         )
 
     new_area = models.Area(

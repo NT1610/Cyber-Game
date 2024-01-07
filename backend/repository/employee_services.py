@@ -62,7 +62,9 @@ def delete_employee(employee_id):
         .first()
     )
     if employee_to_delete is None:
-        raise Exception(status_code=status.HTTP_404_NOT_FOUND, detail="Employee not found")
+        raise Exception(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Employee not found"
+        )
     db.delete(employee_to_delete)
     db.commit()
     return employee_to_delete
