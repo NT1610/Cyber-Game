@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date, time, datetime
+from datetime import date, datetime
 from typing import Optional
 
 
@@ -15,7 +15,7 @@ class Account(MyBaseModel):
 
 
 class Account_out(MyBaseModel):
-    accountID: int 
+    accountID: int
     account: str
     role: str
 
@@ -29,11 +29,29 @@ class UserInfo(MyBaseModel):
     money: float
 
 
+class UserInfo_out(MyBaseModel):
+    userID: int
+    accountID: int
+    name: str
+    birth: date
+    id: str
+    phone: str
+    money: float
+
+
 class Receipt(MyBaseModel):
     userID: int
     description: str
     money: int
-    time: time
+    time: datetime
+
+
+class Receipt_out(MyBaseModel):
+    receiptID: int
+    userID: int
+    description: str
+    money: int
+    time: datetime
 
 
 class Order(MyBaseModel):
@@ -44,9 +62,19 @@ class Order(MyBaseModel):
     status: str
 
 
+class Order_out(MyBaseModel):
+    orderID: int
+    userID: int
+    foodID: int
+    quantity: int
+    orderTime: datetime
+    status: str
+
+
 class Menu(MyBaseModel):
     name: int
     price: float
+    quantity: int
 
 
 class Storage(MyBaseModel):
@@ -57,6 +85,16 @@ class Storage(MyBaseModel):
 class Computer(MyBaseModel):
     area: str
     status: str
+
+
+class Computer_out(MyBaseModel):
+    comID: int
+    area: str
+    status: str
+
+
+class Area(MyBaseModel):
+    price: int
 
 
 class Employee(MyBaseModel):
@@ -74,6 +112,12 @@ class Work(MyBaseModel):
     status: str
     startTime: datetime
     endTime: datetime
+
+
+class Connect(MyBaseModel):
+    userID: int
+    comID: int
+    startTime: datetime
 
 
 class Login(MyBaseModel):

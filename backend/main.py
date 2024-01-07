@@ -1,9 +1,14 @@
 from fastapi import FastAPI
-from routers import api_admin, auth, api_user
+from routers import api_admin, auth, api_user, api_employee
 from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+
+@app.get("/")
+async def get():
+    return "Hello, world!"
 
 
 origins = [
@@ -25,11 +30,10 @@ app.add_middleware(
     allow_origins=[""],
     allow_credentials=True,
     allow_methods=[""],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 app.include_router(api_admin.router)
 app.include_router(auth.router)
 app.include_router(api_user.router)
-
-
+app.include_router(api_employee.router)

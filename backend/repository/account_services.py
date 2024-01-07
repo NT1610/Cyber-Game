@@ -2,14 +2,24 @@ from fastapi import status, Depends, HTTPException
 from database import Session_local
 from validations import Account
 import models, hashing
+
 db = Session_local()
 
 
 def read_account():
     return db.query(models.Account).all()
 
+
+def read_account_user():
+    db_user = db.query(models.Account).filter(models.Account.role == "User").all()
+    return db_user
+
+
 def read_account_id(accountID: int):
-    return db.query(models.Account).filter(models.Account.accountID == accountID).first()
+    return (
+        db.query(models.Account).filter(models.Account.accountID == accountID).first()
+    )
+
 
 def create_account(account: Account):
     new_account = models.Account(
@@ -49,9 +59,7 @@ def update_account(account_id: int, account: Account):
         .first()
     )
     if existing_account is not None:
-        raise HTTPException(
-            status_code=400, detail="Account already exists"
-        )
+        raise HTTPException(status_code=400, detail="Account already exists")
 
     db_account.account = account.account
     db_account.password = hashing.Hash.bcrypt(account.password)
