@@ -12,6 +12,16 @@ def read_userinfo():
     return db.query(models.UserInfo).all()
 
 
+def get_user_by_account_id(account_id):
+    temp = db.query(models.UserInfo).filter(models.UserInfo.accountID == account_id).first()
+    if temp is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"User {account_id} not found"
+        )
+
+    return temp
+
+
 def get_user_by_id(user_id):
     temp = db.query(models.UserInfo).filter(models.UserInfo.userID == user_id).first()
     if temp is None:

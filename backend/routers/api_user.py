@@ -1,5 +1,4 @@
-from fastapi import FastAPI, status, Depends, HTTPException, Form
-from fastapi.responses import HTMLResponse
+from fastapi import status, Depends
 from validations import UserInfo, Order, Computer, Receipt, Connect, Area
 from validations import Order_out, UserInfo_out, Computer_out
 from typing import List
@@ -23,6 +22,20 @@ async def read_userinfo_id(
     user_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
     return user_services.get_user_by_id(user_id)
+
+
+@router.get(
+    "/userinfo/{account_id}",
+    response_model=UserInfo_out,
+    status_code=status.HTTP_200_OK,
+)
+async def read_userinfo_by_account_id(
+    account_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+):
+    role = ["Admin", "Employee", "User"]
+    if current_user.role not in role:
+        raise Exception(status_code=status.HTTP_400_BAD_REQUEST, detail="can't user")
+    return user_services.get_user_by_id(account_id)
 
 
 @router.put(

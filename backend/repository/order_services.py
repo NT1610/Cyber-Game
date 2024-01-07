@@ -72,6 +72,7 @@ def update_order(orderID: int, status_oder: str):
     db.refresh(db_order)
     return db_order
 
+
 def delete_order(orderID: int):
     order_to_delete = read_order_id(orderID)
     # if(order_to_delete.status == "done"):
