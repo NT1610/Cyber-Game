@@ -1,6 +1,22 @@
 from fastapi import status, Depends
-from validations import Account, Employee, Work, UserInfo, Receipt, Order, Computer, Connect
-from validations import Account_out, Receipt_out, UserInfo_out, Order_out, Computer_out
+from validations import (
+    Account,
+    Employee,
+    Work,
+    UserInfo,
+    Receipt,
+    Order,
+    Computer,
+    Connect,
+    Area,
+)
+from validations import (
+    Account_out,
+    Receipt_out,
+    UserInfo_out,
+    Order_out,
+    Computer_out,
+)
 from typing import List
 from fastapi import APIRouter
 from repository import (
@@ -10,7 +26,8 @@ from repository import (
     user_services,
     receipt_services,
     order_services,
-    computer_services
+    computer_services,
+    area_services,
 )
 import models, oauth2
 
@@ -173,9 +190,18 @@ async def update_order(orderID: int):
     return order_services.delete_order(orderID)
 
 
-@router.get("/computer", response_model=List[Computer_out], status_code=status.HTTP_200_OK)
+@router.get(
+    "/computer", response_model=List[Computer_out], status_code=status.HTTP_200_OK
+)
 async def read_computer():
     return computer_services.read_computer()
+
+
+@router.post(
+    "/computer", response_model=Computer_out, status_code=status.HTTP_201_CREATED
+)
+async def create_computer(computer: Computer):
+    return computer_services.create_computer(computer)
 
 
 @router.put("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)
@@ -183,3 +209,33 @@ async def update_computer(comID: int, connect: Connect, computer: Computer):
     return computer_services.update_computer(
         comID=comID, connect=connect, computer=computer
     )
+
+
+@router.delete("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)
+async def delete_computer(comID: int):
+    return computer_services.delete_computer(comID)
+
+
+@router.get("/area", response_model=List[Area], status_code=status.HTTP_200_OK)
+async def read_area():
+    return area_services.read_area()
+
+
+@router.get("/area/{area_id}", response_model=Area, status_code=status.HTTP_200_OK)
+async def read_area(area_id: str):
+    return area_services.read_area_id(area_id)
+
+
+@router.post("/area", response_model=Area, status_code=status.HTTP_201_CREATED)
+async def create_area(area: Area):
+    return area_services.create_area(area)
+
+
+@router.put("/area", response_model=Area, status_code=status.HTTP_200_OK)
+async def update_area(area_id: str,area: Area):
+    return area_services.update_area(area_id, area)
+
+
+@router.delete("/area/{area_id}", response_model=Area, status_code=status.HTTP_200_OK)
+async def delete_area(area_id: str):
+    return area_services.delete_area(area_id)

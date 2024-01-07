@@ -9,6 +9,7 @@ from validations import (
     Order,
     Computer,
     Connect,
+    Area,
 )
 from validations import Account_out, Receipt_out, UserInfo_out, Order_out, Computer_out
 from typing import List
@@ -19,6 +20,7 @@ from repository import (
     receipt_services,
     order_services,
     computer_services,
+    area_services,
 )
 
 router = APIRouter(prefix="/employee", tags=["employee"])
@@ -135,3 +137,13 @@ async def update_computer(comID: int, computer: Computer):
     return computer_services.update_computer(
         comID=comID, connect=None, computer=computer
     )
+
+
+@router.get("/area", response_model=List[Area], status_code=status.HTTP_200_OK)
+async def read_area():
+    return area_services.read_area()
+
+
+@router.get("/area/{area_id}", response_model=Area, status_code=status.HTTP_200_OK)
+async def read_area(area_id: str):
+    return area_services.read_area_id(area_id)
