@@ -1,4 +1,4 @@
-from fastapi import status, Depends
+from fastapi import status, Depends, HTTPException
 from validations import UserInfo, Order, Computer, Receipt, Connect, Area
 from validations import Order_out, UserInfo_out, Computer_out
 from typing import List
@@ -34,7 +34,9 @@ async def read_userinfo_by_account_id(
 ):
     role = ["Admin", "Employee", "User"]
     if current_user.role not in role:
-        raise Exception(status_code=status.HTTP_400_BAD_REQUEST, detail="can't user")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="can't user"
+        )
     return user_services.get_user_by_id(account_id)
 
 
@@ -78,7 +80,12 @@ async def read_computer():
 
 
 @router.put("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)
-async def update_computer(comID: int, connect: Connect, computer: Computer):
+async def update_computer(
+    comID: int,
+    connect: Connect,
+    computer: Computer,
+    current_user: models.Account = Depends(oauth2.get_current_user),
+):
     return computer_services.update_computer(
         comID=comID, connect=connect, computer=computer
     )
@@ -90,5 +97,7 @@ async def read_area():
 
 
 @router.get("/area/{area_id}", response_model=Area, status_code=status.HTTP_200_OK)
-async def read_area(area_id: str):
+async def read_area(
+    area_id: str, current_user: models.Account = Depends(oauth2.get_current_user)
+):
     return area_services.read_area_id(area_id)
