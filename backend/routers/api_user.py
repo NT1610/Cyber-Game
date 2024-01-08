@@ -25,7 +25,7 @@ async def read_userinfo_id(
 
 
 @router.get(
-    "/userinfo/{account_id}",
+    "/userinfo/account/{account_id}",
     response_model=UserInfo_out,
     status_code=status.HTTP_200_OK,
 )
@@ -37,7 +37,7 @@ async def read_userinfo_by_account_id(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't user"
         )
-    return user_services.get_user_by_id(account_id)
+    return user_services.get_user_by_account_id(account_id)
 
 
 @router.put(
