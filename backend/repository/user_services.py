@@ -13,7 +13,11 @@ def read_userinfo():
 
 
 def get_user_by_account_id(account_id):
-    temp = db.query(models.UserInfo).filter(models.UserInfo.accountID == account_id).first()
+    temp = (
+        db.query(models.UserInfo)
+        .filter(models.UserInfo.accountID == account_id)
+        .first()
+    )
     if temp is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"User {account_id} not found"
@@ -71,6 +75,8 @@ def delete_userinfo(userInfo_id):
 
     if db_user is None:
         raise Exception(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    db.delete(db_user)
+    db.commit()
     return db_user
 
 
