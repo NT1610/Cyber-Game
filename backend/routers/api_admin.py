@@ -198,6 +198,21 @@ async def read_user(
     return user_services.get_user_by_id(user_id)
 
 
+@router.get(
+    "/userinfo/account/{account_id}",
+    response_model=UserInfo_out,
+    status_code=status.HTTP_200_OK,
+)
+async def read_userinfo_by_account_id(
+    account_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+):
+    if current_user.role != "Admin":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
+        )
+    return user_services.get_user_by_account_id(account_id)
+
+
 @router.post(
     "/userinfo", response_model=UserInfo_out, status_code=status.HTTP_201_CREATED
 )
