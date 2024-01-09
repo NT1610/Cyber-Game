@@ -32,7 +32,7 @@ async def read_account(current_user: models.Account = Depends(oauth2.get_current
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't employee"
         )
-    return account_services.read_account_user()
+    return account_services.read_account_by_employee()
 
 
 @router.post(
