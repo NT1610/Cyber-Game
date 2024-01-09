@@ -10,14 +10,20 @@ def read_account():
     return db.query(models.Account).all()
 
 
-def read_account_user():
+def read_account_by_employee():
     db_user = db.query(models.Account).filter(models.Account.role == "User").all()
     return db_user
 
 
-def read_account_id(accountID: int):
+def read_account_id(account_id: int):
     return (
-        db.query(models.Account).filter(models.Account.accountID == accountID).first()
+        db.query(models.Account).filter(models.Account.accountID == account_id).first()
+    )
+
+
+def read_account_id_by_employee(account_id: int):
+    return (
+        db.query(models.Account).filter(models.Account.accountID == account_id, models.Account.role == "User").first()
     )
 
 
@@ -78,6 +84,23 @@ def delete_account(account_id):
     if account_to_delete is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Resource not found"
+        )
+
+    db.delete(account_to_delete)
+    db.commit()
+    return account_to_delete
+
+
+def delete_account_by_employee(account_id):
+    account_to_delete = (
+        db.query(models.Account)
+        .filter(models.Account.accountID == account_id, models.Account.role == "User")
+        .first()
+    )
+
+    if account_to_delete is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Resource/User not found"
         )
 
     db.delete(account_to_delete)

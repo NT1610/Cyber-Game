@@ -1,14 +1,14 @@
 from fastapi import FastAPI
+from fastapi.openapi.models import Info, Contact, License
 from routers import api_admin, auth, api_user, api_employee
 from fastapi.middleware.cors import CORSMiddleware
 
+description = """sfdssdfsd
+    
+        
+"""
 
-app = FastAPI()
-
-
-@app.get("/")
-async def get():
-    return "Hello, world!"
+app = FastAPI(title="Cyber Game", description=description)
 
 
 origins = [
@@ -33,7 +33,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_admin.router)
 app.include_router(auth.router)
-app.include_router(api_user.router)
+# app.include_router(api_account.router)
+app.include_router(api_admin.router)
 app.include_router(api_employee.router)
+app.include_router(api_user.router)
+
+
+@app.get("/")
+async def get():
+    return "Hello, world!"
