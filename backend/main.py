@@ -2,13 +2,15 @@ from fastapi import FastAPI
 from fastapi.openapi.models import Info, Contact, License
 from routers import api_admin, auth, api_user, api_employee
 from fastapi.middleware.cors import CORSMiddleware
+import description
 
-description = """sfdssdfsd
-    
-        
-"""
 
-app = FastAPI(title="Cyber Game", description=description)
+app = FastAPI(
+    title="API Cybergame",
+    version="1.0.0",
+    description=description.text,
+    openapi_url="/openapi.json",
+)
 
 
 origins = [
