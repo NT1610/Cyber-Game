@@ -9,6 +9,7 @@ from repository import (
     computer_services,
     receipt_services,
     area_services,
+    connect_services,
 )
 import oauth2, models
 
@@ -101,3 +102,10 @@ async def read_area(
     area_id: str, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
     return area_services.read_area_id(area_id)
+
+
+@router.get("/connect/{com_id}", response_model=Connect, status_code=status.HTTP_200_OK)
+async def read_area(
+    com_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+):
+    return connect_services.read_connect_by_computer(com_id)
