@@ -10,6 +10,13 @@ def read_connect():
     return db.query(models.Connect).all()
 
 
+def read_connect_by_computer(com_id: int):
+    db_connect = db.query(models.Connect).filter(models.Connect.comID == com_id).first()
+    if db_connect is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="com_id is not connected")
+    return db_connect
+
+
 def create_connect(connect: Connect):
     db_user = (
         db.query(models.UserInfo)
