@@ -22,7 +22,7 @@ from repository import (
 
 import models, oauth2
 
-router = APIRouter(prefix="/employee", tags=["employee"])
+router = APIRouter(prefix="/employee", tags=["Employee"])
 
 
 @router.get("/account", response_model=List[Account_out], status_code=200)
@@ -44,8 +44,12 @@ async def create_account(
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="can't employee"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Not an Admin"
         )
+
+    if current_user.role == "Employee":
+        account.role = "User"
+
     return account_services.create_account(account)
 
 
@@ -60,8 +64,14 @@ async def update_account(
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="can't employee"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Not an Admin"
         )
+    
+    
+
+    if current_user.role == "Employee":
+        account.role = "User"
+
     return account_services.update_account(account_id, account)
 
 

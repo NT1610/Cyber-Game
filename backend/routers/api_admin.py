@@ -31,7 +31,7 @@ from repository import (
 )
 import models, oauth2
 
-router = APIRouter(prefix="/admin", tags=["admins"])
+router = APIRouter(prefix="/admin", tags=["Admin"])
 
 
 @router.get("/account", response_model=List[Account_out], status_code=200)
@@ -295,7 +295,7 @@ async def create_reciept(
     return receipt_services.create_receipt(receipt)
 
 
-@router.get("/order", response_model=Order, status_code=status.HTTP_200_OK)
+@router.get("/order", response_model=List[Order], status_code=status.HTTP_200_OK)
 async def read_order(
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
