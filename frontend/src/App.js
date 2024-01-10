@@ -1,41 +1,34 @@
-import './App.css';
-import React, { useState } from 'react';
+import './App.scss';
+import Header from './components/Common/Header';
+import Container from 'react-bootstrap/Container';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useContext, useEffect } from 'react';
+import AppRoutes from './routes/AppRoutes';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleRefresh } from './Redux/actions/userAction';
 
-const App = () => {
-  const [image, setImage] = useState(null)
-  const onImageChange = (event) => {
-    //codition to check if input is empty
-    if(event.target.files){
-      const files = Array.from(event.target.files)
-      //create an url to show image in return <img/>
-      setImage(URL.createObjectURL(files[0]));
-      for (let index = 0; index < files.length; index++) {
-        //append all files from input with key:index, value:file
-        localStorage.setItem(index,files[index])
+function App() {
+  const dispatch =useDispatch();
+  useEffect(()=>{
+    if(localStorage.getItem("access_token")){
+      // loginContext(localStorage.getItem("email"),localStorage.getItem("token"))
+      dispatch(handleRefresh())
     }
-    //check values of localStorage in console
-    console.log("check:  ",localStorage)
-    }
-    // clear localStorage for display component
-    
-  }
-  const clearData =() =>{
-    localStorage.clear()
-  }
-  
-  return(
-    <div className='App-header'>
-      <h3>Upload files</h3>
-      {/* set mutiple in order to select mutiple files at once */}
-      <input type="file" onChange={onImageChange} />
-      {/* return img */}
-      <img alt="preview" src={image}/>
-      <button alt="clear" onClick={clearData}>clear localStorage</button>
-      <img alt="preview" src={'./image/background/back1.jpg'}/>
-
+  },[])
+  return (
+    <div className='app-container'>
+      
+      <Header/>
+      <Container>
+        <AppRoutes></AppRoutes>
+      </Container>
+      <ToastContainer
+      position="top-right"
+      autoClose={1000}
+      />
     </div>
   );
-};
-
+}
 
 export default App;
