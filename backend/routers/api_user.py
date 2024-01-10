@@ -80,6 +80,14 @@ async def read_computer():
     return computer_services.read_computer()
 
 
+@router.get("/computer/{computer_id}", response_model=Computer_out, status_code=status.HTTP_200_OK)
+async def read_computer_id(
+    com_id: int,
+    current_user: models.Account = Depends(oauth2.get_current_user),
+):
+    return computer_services.read_computer_id(com_id)
+
+
 @router.put("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)
 async def update_computer(
     comID: int,
