@@ -23,7 +23,9 @@ def read_account_id(account_id: int):
 
 def read_account_id_by_employee(account_id: int):
     return (
-        db.query(models.Account).filter(models.Account.accountID == account_id, models.Account.role == "User").first()
+        db.query(models.Account)
+        .filter(models.Account.accountID == account_id, models.Account.role == "User")
+        .first()
     )
 
 

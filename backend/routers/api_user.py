@@ -79,7 +79,6 @@ async def create_order(
 async def read_computer():
     return computer_services.read_computer()
 
-
 @router.get("/computer/{computer_id}", response_model=Computer_out, status_code=status.HTTP_200_OK)
 async def read_computer_id(
     com_id: int,
@@ -117,3 +116,9 @@ async def read_area(
     com_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
     return connect_services.read_connect_by_computer(com_id)
+
+@router.get("/connect/user/{user_id}", response_model=Connect, status_code=status.HTTP_200_OK)
+async def read_area(
+    user_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+):
+    return connect_services.read_connect_by_user(user_id)
