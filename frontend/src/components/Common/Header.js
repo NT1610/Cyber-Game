@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.jpeg'
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import {jwtDecode} from "jwt-decode";
 import moment from 'moment';
 import { putUpdateWork, fetchEmployee,fetchAllEmployee,fetchWork } from '../services/AdminService';
+import style from './Header.css'
 
 
 
@@ -76,7 +77,8 @@ const Header=({size, setShow})=>{
     <Navbar expand="lg" 
     className="bg-body-tertiary" 
     bg='dark'
-    data-bs-theme={window.location.pathname === '/login' ? 'dark' :''}> 
+    //data-bs-theme={window.location.pathname === '/login' ? 'dark' :''}
+    > 
     <Container >
 
       <NavLink to="/" className='navbar-brand'>

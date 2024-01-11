@@ -20,9 +20,7 @@ function App() {
     <div className='app-container'>
       
       <Header/>
-      <Container>
         <AppRoutes></AppRoutes>
-      </Container>
       <ToastContainer
       position="top-right"
       autoClose={1000}

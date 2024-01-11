@@ -1,5 +1,5 @@
 
-import '../../../scss/Table.scss'
+import '../../../scss/Table.scss';
 import {jwtDecode} from "jwt-decode";
 import { useEffect,useState } from 'react';
 import { fetchUserInfo } from '../../services/UserService';
@@ -7,6 +7,8 @@ import { fetchConnect } from '../../services/UserService';
 import { handleRefresh } from '../../../Redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import moment from 'moment'; // hoặc import { format } from 'date-fns';
+import poster from '../../../assets/MainHome.gif';
+import style from './Home.css'
 
 
 
@@ -81,14 +83,16 @@ const Home =() =>{
   }
 
   return(
-    <>
+    <body>
       <>Hello this is home page</>
       <Time></Time>
       <div>
-        <button onClick={handleClick}>Bấm vào đây đã chọn máy</button>
-
+        <img className='poster' src = {poster} alt ='Main'></img>
       </div>
-    </>
+      <div>
+        <button onClick={handleClick}>Bấm vào đây đã chọn máy</button>
+      </div>
+    </body>
   )
 
 }
