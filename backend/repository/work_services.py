@@ -12,6 +12,18 @@ def read_work():
     return db.query(models.Work).all()
 
 
+def read_work_id(employee_id: int):
+    db_work = (
+        db.query(models.Work).filter(models.Work.employeeID == employee_id).first()
+    )
+
+    if db_work is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="employeeID not found"
+        )
+    return db_work
+
+
 def create_work(work: Work):
     db_work = (
         db.query(models.Work)
@@ -22,9 +34,9 @@ def create_work(work: Work):
         .filter(models.Employee.employeeID == work.employeeID)
         .first()
     )
-    if db_work is None:
+    if db_work is not None:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="employeeID is required"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="employeeID is exist"
         )
 
     new_work = models.Work(
@@ -38,8 +50,8 @@ def create_work(work: Work):
     return new_work
 
 
-def update_work(workID: int, work: Work):
-    db_work = db.query(models.Work).filter(models.Work.workID == workID).first()
+def update_work(employeeID: int, work: Work):
+    db_work = db.query(models.Work).filter(models.Work.employeeID == employeeID).first()
     if db_work is None:
         raise Exception(
             status_code=status.HTTP_404_NOT_FOUND, detail="workID not found"

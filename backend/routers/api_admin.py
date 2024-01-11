@@ -88,22 +88,14 @@ async def delete_account(
 async def read_employee(
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
-    if current_user.role != "Admin":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
-        )
     return employee_services.read_employee()
 
 
-@router.get("/employee/{e_id}", response_model=Employee, status_code=200)
+@router.get("/employee/{account_id}", response_model=Employee, status_code=200)
 async def read_employee(
-    e_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+    account_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
-    if current_user.role != "Admin":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
-        )
-    return employee_services.get_employee_by_id(e_id)
+    return employee_services.get_employee_by_id(account_id)
 
 
 @router.post("/employee", response_model=Employee, status_code=status.HTTP_201_CREATED)
@@ -117,9 +109,9 @@ async def create_employee(
     return employee_services.create_employee(employee)
 
 
-@router.put("/employee/{employee_id}", response_model=Employee, status_code=200)
+@router.put("/employee/{accountID}", response_model=Employee, status_code=200)
 async def update_employee(
-    employee_id: int,
+    accountID: int,
     employee: Employee,
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
@@ -127,20 +119,20 @@ async def update_employee(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
         )
-    return employee_services.update_employee(employee_id, employee)
+    return employee_services.update_employee(accountID, employee)
 
 
 @router.delete(
-    "/employee/{employee_id}", response_model=Employee, status_code=status.HTTP_200_OK
+    "/employee/{accountID}", response_model=Employee, status_code=status.HTTP_200_OK
 )
 async def delete_employee(
-    employee_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+    accountID: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
     if current_user.role != "Admin":
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
         )
-    return employee_services.delete_employee(employee_id)
+    return employee_services.delete_employee(accountID)
 
 
 @router.get("/work", response_model=List[Work], status_code=status.HTTP_200_OK)
@@ -152,28 +144,27 @@ async def read_work(current_user: models.Account = Depends(oauth2.get_current_us
     return work_services.read_work()
 
 
+@router.get("/work/{employee_id}", response_model=Work, status_code=status.HTTP_200_OK)
+async def read_work(
+    employee_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+):
+    return work_services.read_work_id(employee_id)
+
+
 @router.post("/work", response_model=Work, status_code=status.HTTP_201_CREATED)
 async def create_work(
     work: Work, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
-    if current_user.role != "Admin":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
-        )
     return work_services.create_work(work)
 
 
-@router.put("/work/{workID}", response_model=Work, status_code=status.HTTP_200_OK)
+@router.put("/work/{employeeID}", response_model=Work, status_code=status.HTTP_200_OK)
 async def update_work(
-    workID: int,
+    employeeID: int,
     work: Work,
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
-    if current_user.role != "Admin":
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
-        )
-    return work_services.update_work(workID, work)
+    return work_services.update_work(employeeID, work)
 
 
 @router.get(
@@ -299,7 +290,7 @@ async def create_reciept(
 async def read_order(
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
-    if current_user.role != "Admin":
+    if current_user.role != "Admin" and current_user.role != "Employee":
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
         )

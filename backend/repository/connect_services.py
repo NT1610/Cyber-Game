@@ -13,7 +13,20 @@ def read_connect():
 def read_connect_by_computer(com_id: int):
     db_connect = db.query(models.Connect).filter(models.Connect.comID == com_id).first()
     if db_connect is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="com_id is not connected")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="com_id is not connected"
+        )
+    return db_connect
+
+
+def read_connect_by_user(user_id: int):
+    db_connect = (
+        db.query(models.Connect).filter(models.Connect.userID == user_id).first()
+    )
+    if db_connect is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="user_id is not connected"
+        )
     return db_connect
 
 
