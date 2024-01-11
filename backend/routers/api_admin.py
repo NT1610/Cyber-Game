@@ -143,6 +143,11 @@ async def read_work(current_user: models.Account = Depends(oauth2.get_current_us
         )
     return work_services.read_work()
 
+@router.get("/work/{employee_id}", response_model=Work, status_code=status.HTTP_200_OK)
+async def read_work(employee_id:int,current_user: models.Account = Depends(oauth2.get_current_user)):
+
+    return work_services.read_work_id(employee_id)
+
 
 @router.get("/work/{employee_id}", response_model=Work, status_code=status.HTTP_200_OK)
 async def read_work(
@@ -290,7 +295,7 @@ async def create_reciept(
 async def read_order(
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
-    if current_user.role != "Admin" and current_user.role != "Employee":
+    if current_user.role != "Admin" and current_user.role != "Employee" :
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
         )
