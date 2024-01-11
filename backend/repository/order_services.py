@@ -62,7 +62,7 @@ def update_order(orderID: int, status_oder: str):
     db_order = read_order_id(orderID)
 
     db_order.status = status_oder
-    allowed_statuses = ["done", "processing"]
+    allowed_statuses = ["Done", "Processing"]
     if status_oder not in allowed_statuses:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
