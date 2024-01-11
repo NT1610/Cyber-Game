@@ -30,7 +30,7 @@ const fetchUserInfo = (id) =>{
     )
 }
 const fetchAllComputer =()=>{
-    return axios.get("/admin/computer",
+    return axios.get("/employee/computer",
     {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -47,8 +47,35 @@ const fetchAllOrder =()=>{
     }
     )
 }
+const fetchAllReciept =()=>{
+    return axios.get("/admin/reciept",
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 const fetchAllEmployee=() =>{
     return axios.get('/admin/employee',
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+const fetchAllWork=() =>{
+    return axios.get('/admin/work',
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+const fetchWork=(workd_id) =>{
+    return axios.get(`/admin/work/${workd_id}`,
     {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -65,6 +92,16 @@ const fetchComputer =(com_id)=>{
     }
     )
 }
+const fetchEmployee =(account_id)=>{
+    return axios.get(`/admin/employee/${account_id}`,
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+
 
 //post method
 const postCreateUser  =(accountID,name,birth,id,phone,money)=>{
@@ -94,7 +131,15 @@ const postCreateComputer =(area,status)=>{
     }
     )
 }
-
+const postCreateWork = (employeeID,status,startTime,endTime) =>{
+    return axios.post("/admin/work",{employeeID,status,startTime,endTime},
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 //put method
 
 const putUpdateAccount =(id,account,password,role) =>{
@@ -125,6 +170,18 @@ const putUpdateComputer =(connect,computer,comID) =>{
     }
     )
 }
+
+const putUpdateWork =(employee_id,status,startTime,endTime) =>{
+    return axios.put(`/admin/work/${employee_id}`,{employee_id,status,startTime,endTime},
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+
+
 //delete method
 
 const deleteAccount = (id) =>{
@@ -161,4 +218,4 @@ const loginApi =(request) => {
 
 
 
-export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer};
+export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee};

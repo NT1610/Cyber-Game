@@ -3,7 +3,8 @@ import '../../../scss/Login.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleLoginRedux } from '../../../Redux/actions/userAction';
 import { useDispatch,useSelector } from 'react-redux';
-import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 const Login = () =>{
     const dispatch = useDispatch();
@@ -15,17 +16,11 @@ const Login = () =>{
     // const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
-    // const [showIcon, setShowIcon] = useState(false);
-    // const [loadingApi,setLoadingApi]= useState(false);
-    // const { loginContext } = useContext(UserContext);
+
 
 
     const handleLogin =async()  =>{
         
-        // if(!userName || !password){
-        //     toast.error("Email/Password is required!");
-        //     return;
-        // }
 
         dispatch(handleLoginRedux(userName,password));
  

@@ -1,6 +1,8 @@
 import { toast } from 'react-toastify';
 import { loginApi } from '../../components/services/AdminService';
 import { jwtDecode } from 'jwt-decode';
+import moment from 'moment'; // hoặc import { format } from 'date-fns';
+import { postCreateWork } from '../../components/services/AdminService';
 
 export const FETCH_USER_LOGIN='FETCH_USER_LOGIN';
 export const FETCH_USER_LOGIN_ERROR='FETCH_USER_LOGIN_ERROR';
@@ -12,6 +14,7 @@ export const USER_LOGOUT='USER_LOGOUT';
 
 
 export const handleLoginRedux = (userName,password) =>{
+
     return async(dispatch,getState) => {
         dispatch({type:FETCH_USER_LOGIN});
 
@@ -30,12 +33,14 @@ export const handleLoginRedux = (userName,password) =>{
                 type:FETCH_USER_LOGIN_SUCESS,
                 data: {userName:userName,access_token:res.access_token}
             })
-            let decoded= jwtDecode(localStorage.access_token)
-            if(decoded.role==="User"){
-                localStorage.setItem('chose',false)
-            }
+            // let decoded= jwtDecode(localStorage.access_token)
+            // if(decoded.role==="User"){
+            //     localStorage.setItem('chose',false)
+            // }
         }
         else{
+            toast.error("Please check username/password");
+
             if(res && res.status ===400){
                 toast.error(res.data.error);
             }
@@ -52,11 +57,7 @@ export const handleLogoutRedux = (userName,password) =>{
     return async(dispatch,getState) => {
         toast.success("Log out");
         dispatch({type:USER_LOGOUT});
-        // localStorage.removeItem('access_token')
-        // localStorage.removeItem('userName')
-        // localStorage.removeItem('timeStart')
-        // localStorage.removeItem('chose')
-        // localStorage.removeItem('cart')
+
         localStorage.clear()
 
     }

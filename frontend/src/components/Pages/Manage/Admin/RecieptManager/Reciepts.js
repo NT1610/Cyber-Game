@@ -1,26 +1,26 @@
 
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
-import { fetchAllOrder } from '../../../services/AdminService';
+import { fetchAllReciept } from '../../../../services/AdminService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from './ModalAddNew';
-import ModalEdit from './ModalEdit';
-import ModalDelete from './ModalDelete';
+// import ModalAddNew from './ModalAddNew';
+// import ModalEdit from './ModalEdit';
+// import ModalDelete from './ModalDelete';
 import { CSVLink } from "react-csv";
-import '../../../../scss/Table.scss'
+import '../../../../../scss/Table.scss'
 
 
-const OrderList =() =>{
+const Reciepts =() =>{
     const [totalPages,setTotalPages]= useState(0);
     const [originList,setOriginList]=useState([]);
   
     useEffect(()=>{
-      getUsers();
+      getReciepts();
     },[originList])
   
   
-    const getUsers= async()=>{
-      let res = await fetchAllOrder();
+    const getReciepts= async()=>{
+      let res = await fetchAllReciept();
       if(res){
         setOriginList(res.reverse())
       }
@@ -31,17 +31,18 @@ const OrderList =() =>{
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >Order List:</span>
+            <span >List Account:</span>
             <div className='func-button'>
               <CSVLink 
-              filename={"myListOrder.csv"}
+              filename={"myListReciept.csv"}
               className="btn btn-primary"
               target="_blank"
               data={originList}>
               <i className='fa-solid fa-file-arrow-down'/>
               Export File
               </CSVLink>
-              <ModalAddNew/>
+              {/* <ModalAddNew
+              /> */}
             </div>
           </div>
           <div className='customize-table'>
@@ -50,21 +51,29 @@ const OrderList =() =>{
                 <tr>
                   <th>
                       <div className='sort-header'>                  
-                        UserID
+                      Receipt ID
                       </div>
                   </th>
                   <th>
                       <div className='sort-header'>                  
-                        FoodID ID
+                      User ID
                       </div>
                   </th>
                   <th>
                       <div className='sort-header'>                  
-                        Quantity
+                      Description
                       </div>
                   </th>
-                  <th className='sort-header'><div>Order Time</div></th>
-                  <th >Status</th>
+                  <th>
+                      <div className='sort-header'>                  
+                      Money
+                      </div>
+                  </th>
+                  <th>
+                      <div className='sort-header'>                  
+                      Time
+                      </div>
+                  </th>
 
                 </tr>
               </thead>
@@ -73,19 +82,19 @@ const OrderList =() =>{
                 originList.map((item,index) =>{
                   return(
                     <tr key={`user${index}`}>
+                        <td>{item.receiptID}</td>
                         <td>{item.userID}</td>
-                        <td>{item.foodID}</td>
-                        <td>{item.quantity}</td>
-                        <td>{item.orderTime}</td>
-                        <td>{item.status}</td>
-                        <td>
+                        <td>{item.description}</td>
+                        <td>{item.money}</td>
+                        <td>{item.time}</td>
+                        {/* <td>
                           <ModalEdit 
                           item={item}
                           />
                           <ModalDelete                      
                           item={item}
                           />
-                        </td>
+                        </td> */}
                   </tr>
                   )
                 })
@@ -117,4 +126,4 @@ const OrderList =() =>{
 
 
 
-export default OrderList
+export default Reciepts

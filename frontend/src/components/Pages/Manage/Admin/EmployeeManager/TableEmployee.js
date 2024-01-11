@@ -1,29 +1,36 @@
 
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
-import { fetchAllEmployee } from '../../../../services/AdminService';
-// import ModalAddNew from './ModalAddNew';
-// import ModalEdit from './ModalEdit';
-// import ModalDelete from './ModalDelete';
+import { fetchAllEmployee ,fetchAllWork,fetchWork} from '../../../../services/AdminService';
+import ModalAddNew from './ModalAddNew';
+import ModalEdit from './ModalEdit';
+import ModalDelete from './ModalDelete';
 import { CSVLink } from "react-csv";
 import '../../../../../scss/Table.scss'
 
-
 const TableEmployee =() =>{
     const [originList,setOriginList]=useState([]);
+    const [WorkList,setWorkList]=useState([]);
+
   
     useEffect(()=>{
-      getUsers();
+      getEmployees();
+      getAllWorks();
     },[])
   
   
-    const getUsers= async()=>{
+    const getEmployees= async()=>{
       let res = await fetchAllEmployee();
       if(res){
-        setOriginList(res.sort((a, b) => a.id - b.id))
+        setOriginList(res.reverse())
       }
     }
-
+    const getAllWorks= async()=>{
+      let res = await fetchAllWork();
+      if(res){
+        setWorkList(res.reverse())
+      }
+    }
       return (
           <>
           <div className='col-12 col-sm-4 my-3'>
@@ -39,7 +46,7 @@ const TableEmployee =() =>{
               <i className='fa-solid fa-file-arrow-down'/>
               Export File
               </CSVLink>
-              {/* <ModalAddNew/> */}
+              <ModalAddNew/>
             </div>
           </div>
           <div className='customize-table'>
@@ -80,14 +87,74 @@ const TableEmployee =() =>{
                         <td>{item.birth}</td>
                         <td>{item.position}</td>
                         <td>{item.salary}</td>
-                        {/* <td>
+                        <td>
                           <ModalEdit 
                           item={item}
                           />
                           <ModalDelete                      
                           item={item}
                           />
-                        </td> */}
+                        </td>
+                  </tr>
+                  )
+                })
+                }
+              </tbody>
+            </Table>
+          </div>
+          <div className='col-12 col-sm-4 my-3'>
+          </div>
+          <div className="d-sm-flex justify-content-between">
+            <span >List Employee:</span>
+            <div className='func-button'>
+              <CSVLink 
+              filename={"WorkList.csv"}
+              className="btn btn-primary"
+              target="_blank"
+              data={originList}>
+              <i className='fa-solid fa-file-arrow-down'/>
+              Export File
+              </CSVLink>
+              <ModalAddNew/>
+            </div>
+          </div>
+          <div className='customize-table'>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>
+                      <div className='sort-header'>                  
+                      Employee  ID
+                      </div>
+                  </th>
+                  <th>
+                      <div className='sort-header'>                  
+                      Status
+                      </div>
+                  </th>
+                  <th>
+                      <div className='sort-header'>                  
+                      Start Time
+                      </div>
+                  </th>
+                  <th>
+                      <div className='sort-header'>                  
+                      End Time
+                      </div>
+                  </th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+                {WorkList && WorkList.length>0 &&
+                WorkList.map((item,index) =>{
+                  return(
+                    <tr key={`user${index}`}>
+                        <td>{item.employeeID}</td>
+                        <td>{item.status}</td>
+                        <td>{item.startTime}</td>
+                        <td>{item.endTime}</td>
                   </tr>
                   )
                 })

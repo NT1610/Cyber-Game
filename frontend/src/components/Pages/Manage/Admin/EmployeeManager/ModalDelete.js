@@ -1,45 +1,45 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { deleteComputer } from '../../../services/AdminService';
+import { deleteAccount } from '../../../../services/AdminService';
 import { toast } from 'react-toastify';
 
 
 const ModalDelete = (props) => {
   const [show, setShow] = useState(false);
-  const [ComputerID,setComputerID]=useState("");
-  const [dataComputerDelete,setDataComputerDelete]=useState([])
+  let [Account,setAccount]=useState("");
+  const [dataUserDelete,setDataUserDelete]=useState([])
 
   const {item}=props
-  const handleEditComputer =(Computer) =>{
-    console.log(Computer)
-    setDataComputerDelete(Computer)
+  const handleEditUser =(user) =>{
+    console.log(user)
+    setDataUserDelete(user)
   }
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
-    handleEditComputer(item);
+    handleEditUser(item);
   }
 
-  const handleDeleteComputer = async() =>{
-        let res = await deleteComputer(dataComputerDelete.comID
-            );
-        console.log(res)
-        if(res && res.comID){
-            handleClose();
-            let string ='Del acc:'+String(dataComputerDelete.comID)
-            toast.success(string)
+  const handledeleteAccount = async() =>{
+        let res = await deleteAccount(dataUserDelete.accountID);
+        console.log(">>res: ",res)
+        console.log(">>code: ",res.statusCode)
 
+        if(res && res.account){
+            handleClose();
+            let string ='Del acc:'+String(dataUserDelete.accountID)
+            toast.success(string)
         }
         else{
-            alert('Error while deletting the Computer');
-        }
+          alert('Error while deletting the Computer');
+      }
   }
   useEffect(()=>{
-    if(show){
-        setComputerID(item.comID)
-    }
+      if(show){
+        setAccount(dataUserDelete.accountID          )
+      }
   },[])
   return (
     <>
@@ -54,19 +54,17 @@ const ModalDelete = (props) => {
         <Modal.Body>
 
         <form >
-            Are You Sure To Delete Computer
+            Are You Sure To Delete User
         </form>
         <br/>
-
-        <b>Computer ID : {item.comID}</b>
-
+        <b>Account ID: {Account}</b>
 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <button type="submit" className="btn btn-primary" onClick={() => handleDeleteComputer() }>Confirm</button>
+          <button type="submit" className="btn btn-primary" onClick={() => handledeleteAccount() }>Confirm</button>
 
         </Modal.Footer>
       </Modal>

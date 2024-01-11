@@ -12,8 +12,8 @@ def read_employee():
     return db.query(models.Employee).all()
 
 
-def get_employee_by_id(e_id: int):
-    temp = db.query(models.Employee).filter(models.Employee.employeeID == e_id).first()
+def get_employee_by_id(account_id: int):
+    temp = db.query(models.Employee).filter(models.Employee.accountID == account_id).first()
     if temp is None:
         raise HTTPException(status_code=404)
 

@@ -4,7 +4,7 @@ import { fetchAllComputer } from '../../../services/AdminService';
 import active from '../../../../assets/computer/Active.png';
 import broken from '../../../../assets/computer/Broken.png';
 import ModalAddNew from './ModalAddNew';
-import ModalDelete from '../Admin/AccountManger/ModalDelete';
+import ModalDelete from './ModalDelete ';
 import '../../../../scss/Table.scss'
 import ModalEdit from './ModalEdit';
 

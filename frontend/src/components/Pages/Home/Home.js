@@ -3,11 +3,15 @@ import '../../../scss/Table.scss'
 import {jwtDecode} from "jwt-decode";
 import { useEffect,useState } from 'react';
 import { fetchUserInfo } from '../../services/UserService';
+import { fetchConnect } from '../../services/UserService';
+import { handleRefresh } from '../../../Redux/actions/userAction';
+import { useDispatch } from 'react-redux';
+import moment from 'moment'; // hoặc import { format } from 'date-fns';
+
+
 
 const Time = () =>{
   const [currentTime, setCurrentTime] = useState(new Date());
-
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,29 +19,51 @@ const Time = () =>{
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+  const formattedDateTime = moment(currentTime).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
   return (
 
     <div>
 
       <p>Thời gian hiện tại: {currentTime.toLocaleTimeString()}</p>
+      <p>Thời gian hiện tại: {formattedDateTime}</p>
+
+      
     </div>
   );
 }
 const Home =() =>{
+  const [pickedComp, setPickedComp] = useState("");
+  const dispatch =useDispatch();
 
   useEffect(()=>{
     getUsers();
+
   },[])
 
   const getUsers= async()=>{
-    // if(localStorage.access_token){
-    //   const decoded= jwtDecode(localStorage.access_token);
-    //   let res = await fetchUserInfo(decoded.account);
-    //   if(res){
-    //     localStorage.setItem('userID',res.userID)
-    //   }
-    //   console.log('>>chec',res)
-    // }
+    if(localStorage.access_token){
+      const decoded= jwtDecode(localStorage.access_token);
+      console.log(decoded)
+      if(decoded.role==="User"){
+        let user = await fetchUserInfo(decoded.account);
+        console.log('check user>>',decoded)
+        getCompInfo(user.userID)
+        console.log('check user>>',user)
+      }
+    }
+  }
+  const getCompInfo = async(userID) =>{
+    let comp = await fetchConnect(userID);
+    console.log('checkcomp',comp,userID)
+    if(comp.comID){
+      setPickedComp(comp.comID)
+      localStorage.setItem('chose',true)
+      dispatch(handleRefresh())
+    }
+    else{
+      localStorage.setItem('chose',false)
+    }
+    console.log('check picked comp',pickedComp)
   }
 
 

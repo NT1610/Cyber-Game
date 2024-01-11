@@ -79,11 +79,12 @@ async def create_order(
 async def read_computer():
     return computer_services.read_computer()
 
-@router.get("/computer/{comp_id}", response_model=List[Computer_out], status_code=status.HTTP_200_OK)
+@router.get("/computer/{computer_id}", response_model=Computer_out, status_code=status.HTTP_200_OK)
 async def read_computer_id(
-    comp_id, current_user: models.Account = Depends(oauth2.get_current_user)
+    com_id: int,
+    current_user: models.Account = Depends(oauth2.get_current_user),
 ):
-    return computer_services.read_computer_id(comp_id)
+    return computer_services.read_computer_id(com_id)
 
 
 @router.put("/computer", response_model=Computer_out, status_code=status.HTTP_200_OK)

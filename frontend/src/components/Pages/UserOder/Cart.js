@@ -19,6 +19,8 @@ import { postCreateOrder,postCreateReciept } from '../../services/UserService';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleRefresh } from '../../../Redux/actions/userAction';
+import moment from 'moment'; // hoặc import { format } from 'date-fns';
+
 
 const listImage=[banhBao,sandwich,bunBo,bunBoNam,dongXu,comChien,oLong,SuaDuaKhoaiTim,pepSI,Matcha,HongCha,Coca,dongXu,dongXu];
 
@@ -26,6 +28,9 @@ const listImage=[banhBao,sandwich,bunBo,bunBoNam,dongXu,comChien,oLong,SuaDuaKho
 const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
     const [price, setPrice] = useState(0);
     const [userID, setUserID] = useState('0');
+    const [currentTime, setCurrentTime] = useState(new Date());
+    const formattedDateTime = moment(currentTime).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+
 
     const decoded= jwtDecode(localStorage.access_token);
 
@@ -43,10 +48,18 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
 
     const handleRemove = (id) =>{
         const arr = cart.filter((item)=>item.id !== id);
+        for (let i = 0; i < cart.length; i++) {
+            if(cart[i].id === id){
+                cart[i].amount=1
+            }
+          } 
         setCart(arr);
         // handlePrice();
     }
     const handleRemoveAll = () =>{
+        for (let i = 0; i < cart.length; i++) {
+            cart[i].amount=1
+          } 
         const arr =[];
         setCart(arr);
         setPrice(0)
@@ -65,10 +78,10 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
         console.log((userID))
         console.log((localStorage.userID))
 
-        let OrderTime="2024-01-08T14:31:23.915Z";
+        
         let Status="Ordered";
         for (let i = 0; i < cart.length; i++) {
-            let res=await postCreateOrder(userID,cart[i].id,cart[i].amount,OrderTime,Status)
+            let res=await postCreateOrder(userID,cart[i].id,cart[i].amount,formattedDateTime,Status)
             if(res&& res.orderID){
                 toast.success(`Ordered sucess ${cart[i].amount} x ${cart[i].title} ${cart[i].author}`)
             }
@@ -77,8 +90,8 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
             }
         }
         const description='food&drink bill'
-        let res=await postCreateReciept(userID,description,price,OrderTime,Status)
-        if(res){
+        let res=await postCreateReciept(userID,description,price,formattedDateTime,Status)
+        if(res && res.receiptID){
             toast.success(`Reciept created`)
         }
         else{
@@ -91,10 +104,16 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
     useEffect(()=>{
         handlePrice();
         getUserInfo();
-    })
+        const interval = setInterval(() => {
+            setCurrentTime(new Date());
+          }, 1000);
+          return () => clearInterval(interval);
+    },[])
 
   return (
     <article>
+              <p>Thời gian hiện tại: {currentTime.toLocaleTimeString()}</p>
+      <p>Thời gian hiện tại: {formattedDateTime}</p>
         {
             cart?.map((item)=>(
                 <div className="cart_box" key={item.id}>

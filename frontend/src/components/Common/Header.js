@@ -12,11 +12,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleLoginRedux, handleLogoutRedux } from '../../Redux/actions/userAction';
 import { useEffect } from 'react';
 import {jwtDecode} from "jwt-decode";
+import moment from 'moment';
+import { putUpdateWork, fetchEmployee,fetchAllEmployee } from '../services/AdminService';
 
+const currentTime=new Date();
+let formattedDateTime = moment(currentTime).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+
+let LoginTIme;
+let LogoutTime;
 
 const Header=({size, setShow})=>{
   const dispatch = useDispatch();
   const user =useSelector(state => state.user.account)
+  let employeeID=0
+
   let decoded = '';
   if (localStorage.access_token){
      decoded= jwtDecode(localStorage.access_token);
@@ -34,7 +43,28 @@ const Header=({size, setShow})=>{
       if ( user && user.access_token ===false){
           navigate('/')
       }
-    }, [user,localStorage])
+      if(decoded && decoded.role=='Employee'){
+        getEmployee()
+
+      }
+    }, [user])
+
+    const getEmployee = async () =>{
+      let emp = await fetchEmployee(decoded.account)
+      let emps = await fetchAllEmployee()
+       
+      console.log('check emps',emps)
+      console.log('check emp',emp)
+      for (let i = 0; i < emps.length; i++) {
+        if(emps[i].accountID==decoded.account){
+          employeeID=i+1
+        }
+      }
+      console.log("emID",employeeID)
+      console.log('check input', employeeID,"checked1", "2024-01-11T05:32:13.041Z", "2024-01-11T05:32:13.041Z")
+      let put =await putUpdateWork(parseInt(employeeID),"checked1", "2024-01-11T05:32:13.041Z", "2024-01-11T05:32:13.041Z")
+      console.log('check put>>',put)
+    }
 
     return(
     <Navbar expand="lg" 
@@ -80,6 +110,11 @@ const Header=({size, setShow})=>{
               {(decoded.role==='Admin') &&
                 <NavLink className='nav-link' to="/computer">
                   Computer
+                </NavLink>
+              }
+              {(decoded.role==='Admin') &&
+                <NavLink className='nav-link' to="/reciept">
+                  Reciept List
                 </NavLink>
               }
               {(decoded.role==='Admin' || decoded.role==='Employee') &&
