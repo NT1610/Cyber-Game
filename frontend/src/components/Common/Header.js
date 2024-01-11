@@ -10,18 +10,21 @@ import { toast } from 'react-toastify';
 // import { UserContext } from '../../context/UserContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleLoginRedux, handleLogoutRedux } from '../../Redux/actions/userAction';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {jwtDecode} from "jwt-decode";
 import moment from 'moment';
-import { putUpdateWork, fetchEmployee,fetchAllEmployee } from '../services/AdminService';
+import { putUpdateWork, fetchEmployee,fetchAllEmployee,fetchWork } from '../services/AdminService';
 
-const currentTime=new Date();
-let formattedDateTime = moment(currentTime).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
 
-let LoginTIme;
-let LogoutTime;
+
 
 const Header=({size, setShow})=>{
+  const currentTime=new Date();
+  let formattedDateTime = moment(currentTime).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+
+  let [LoginTIme,setLoginTIme]=useState('');
+  let [LogoutTime,setLogoutTime]=useState();
+
   const dispatch = useDispatch();
   const user =useSelector(state => state.user.account)
   let employeeID=0
@@ -34,6 +37,9 @@ const Header=({size, setShow})=>{
   // const {logout ,user} = useContext(UserContext);
   const navigate =useNavigate();
     const handleLogout = () =>{
+      if(decoded && decoded.role=='Employee'){
+        getEmployee()
+      }
       dispatch(handleLogoutRedux());
       // logout()
       navigate("/");
@@ -43,27 +49,27 @@ const Header=({size, setShow})=>{
       if ( user && user.access_token ===false){
           navigate('/')
       }
-      if(decoded && decoded.role=='Employee'){
-        getEmployee()
-
-      }
     }, [user])
+    if(user && user.auth===true){
+
+    }
 
     const getEmployee = async () =>{
       let emp = await fetchEmployee(decoded.account)
       let emps = await fetchAllEmployee()
        
-      console.log('check emps',emps)
-      console.log('check emp',emp)
       for (let i = 0; i < emps.length; i++) {
         if(emps[i].accountID==decoded.account){
           employeeID=i+1
         }
       }
-      console.log("emID",employeeID)
-      console.log('check input', employeeID,"checked1", "2024-01-11T05:32:13.041Z", "2024-01-11T05:32:13.041Z")
-      let put =await putUpdateWork(parseInt(employeeID),"checked1", "2024-01-11T05:32:13.041Z", "2024-01-11T05:32:13.041Z")
-      console.log('check put>>',put)
+      let res = await fetchWork(employeeID)
+      console.log('check ON',res)
+      let status = "OFF"
+      let startTime = res.startTime
+      let endTime = formattedDateTime
+      let put =await putUpdateWork(employeeID,status, startTime, endTime)
+      console.log('check put ',put)
     }
 
     return(

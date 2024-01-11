@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { loginApi } from '../../components/services/AdminService';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment'; // hoặc import { format } from 'date-fns';
-import { postCreateWork } from '../../components/services/AdminService';
+import { fetchEmployee,fetchAllEmployee,fetchWork ,putUpdateWork} from '../../components/services/AdminService';
 
 export const FETCH_USER_LOGIN='FETCH_USER_LOGIN';
 export const FETCH_USER_LOGIN_ERROR='FETCH_USER_LOGIN_ERROR';
@@ -14,7 +14,28 @@ export const USER_LOGOUT='USER_LOGOUT';
 
 
 export const handleLoginRedux = (userName,password) =>{
+    let employeeID
 
+    const currentTime=new Date();
+    let formattedDateTime = moment(currentTime).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+    const getEmployee = async (decoded) =>{
+        let emp = await fetchEmployee(decoded.account)
+        let emps = await fetchAllEmployee()
+         
+        console.log('check', emps)
+        for (let i = 0; i < emps.length; i++) {
+          if(emps[i].accountID==decoded.account){
+            employeeID=i+1
+          }
+        }
+        let status = "ON"
+        let startTime = formattedDateTime
+        let endTime = formattedDateTime
+        console.log('check input ',employeeID,status, startTime, endTime)
+
+        let put =await putUpdateWork(employeeID,status, startTime, endTime)
+        console.log('check put ',put)
+      }  
     return async(dispatch,getState) => {
         dispatch({type:FETCH_USER_LOGIN});
 
@@ -26,9 +47,12 @@ export const handleLoginRedux = (userName,password) =>{
 
         if (res && res.access_token){
             toast.success("Log in");
-
             localStorage.setItem('access_token',res.access_token)
             // localStorage.setItem('userName',userName.trim())
+            const decoded= jwtDecode(localStorage.access_token);
+            if(decoded.role==='Employee'){
+                getEmployee(decoded)
+            }
             dispatch({
                 type:FETCH_USER_LOGIN_SUCESS,
                 data: {userName:userName,access_token:res.access_token}

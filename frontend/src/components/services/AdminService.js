@@ -74,8 +74,8 @@ const fetchAllWork=() =>{
     }
     )
 }
-const fetchWork=(workd_id) =>{
-    return axios.get(`/admin/work/${workd_id}`,
+const fetchWork=(employee_id) =>{
+    return axios.get(`/admin/work/${employee_id}`,
     {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -171,8 +171,8 @@ const putUpdateComputer =(connect,computer,comID) =>{
     )
 }
 
-const putUpdateWork =(employee_id,status,startTime,endTime) =>{
-    return axios.put(`/admin/work/${employee_id}`,{employee_id,status,startTime,endTime},
+const putUpdateWork =(employeeID,status,startTime,endTime) =>{
+    return axios.put(`/admin/work/${employeeID}`,{employeeID,status,startTime,endTime},
     {
         headers: {
           'Authorization': `Bearer ${token}`

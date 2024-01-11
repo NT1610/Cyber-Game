@@ -72,7 +72,6 @@ const ModalEdit = (props) => {
           status:Status
         }
         let res = await putUpdateComputer(connect,computer,ComID);
-        console.log('check>>:',connect,computer,ComID)
         console.log('check Update',res)
         
         if(res){
