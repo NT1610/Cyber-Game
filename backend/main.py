@@ -27,13 +27,13 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[""],
-    allow_credentials=True,
-    allow_methods=[""],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=[""],
+#     allow_credentials=True,
+#     allow_methods=[""],
+#     allow_headers=["*"],
+# )
 
 app.include_router(auth.router)
 # app.include_router(api_account.router)

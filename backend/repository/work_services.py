@@ -13,9 +13,7 @@ def read_work():
 
 
 def read_work_id(employee_id: int):
-    db_work = (
-        db.query(models.Work).filter(models.Work.employeeID == employee_id).first()
-    )
+    db_work = db.query(models.Work).filter(models.Work.employeeID == employee_id).first()
 
     if db_work is None:
         raise HTTPException(

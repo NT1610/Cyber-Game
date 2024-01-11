@@ -1,0 +1,34 @@
+.warning{
+    height: 40px;
+    width: 250px;
+    position: absolute;
+    right: 0;
+    top: 10%;
+    background-color: rgb(210, 91, 91);
+    font-size: 1.1rem;
+    color: white;
+    font-family: cursive;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+}
+.container1{
+    width: auto;
+    background-color: antiquewhite;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+
+}
+.container2{
+    height: 100px;
+}
+section{
+    padding: auto;
+}
+.info{
+    position: absolute;  
+    padding: 0;
+    margin: 0;
+}

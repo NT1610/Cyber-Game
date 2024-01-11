@@ -113,6 +113,14 @@ class Receipt(Base):
     money = Column(Integer)
     time = Column(TIMESTAMP)
 
+# class Event(Base):
+#     __tablename__ = "event"
+#     receiptID = Column(Integer, primary_key=True)
+#     userID = Column(Integer, ForeignKey("userinfo.userID"))
+#     description = Column(String)
+#     money = Column(Integer)
+#     time = Column(TIMESTAMP)
+
 
 def create_DB():
     Base.metadata.create_all(bind=engine)

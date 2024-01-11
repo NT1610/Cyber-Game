@@ -13,11 +13,7 @@ def read_employee():
 
 
 def get_employee_by_id(account_id: int):
-    temp = (
-        db.query(models.Employee)
-        .filter(models.Employee.accountID == account_id)
-        .first()
-    )
+    temp = db.query(models.Employee).filter(models.Employee.accountID == account_id).first()
     if temp is None:
         raise HTTPException(status_code=404)
 
