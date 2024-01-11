@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { deleteAccount } from '../../../../services/AdminService';
+import { deleteEmployee } from '../../../../services/AdminService';
 import { toast } from 'react-toastify';
 
 
 const ModalDelete = (props) => {
   const [show, setShow] = useState(false);
-  let [Account,setAccount]=useState("");
-  const [dataUserDelete,setDataUserDelete]=useState([])
-
   const {item}=props
   const handleEditUser =(user) =>{
     console.log(user)
-    setDataUserDelete(user)
   }
 
   const handleClose = () => setShow(false);
@@ -23,24 +19,20 @@ const ModalDelete = (props) => {
   }
 
   const handledeleteAccount = async() =>{
-        let res = await deleteAccount(dataUserDelete.accountID);
+        let res = await deleteEmployee(item.accountID);
         console.log(">>res: ",res)
         console.log(">>code: ",res.statusCode)
 
-        if(res && res.account){
+        if(res && res.accountID){
             handleClose();
-            let string ='Del acc:'+String(dataUserDelete.accountID)
+            let string ='Del employee acc:'+String(item.accountID)
             toast.success(string)
         }
         else{
           alert('Error while deletting the Computer');
       }
   }
-  useEffect(()=>{
-      if(show){
-        setAccount(dataUserDelete.accountID          )
-      }
-  },[])
+ 
   return (
     <>
       <Button onClick={handleShow}                  
@@ -57,7 +49,7 @@ const ModalDelete = (props) => {
             Are You Sure To Delete User
         </form>
         <br/>
-        <b>Account ID: {Account}</b>
+        <b>Account ID: {item.accountID}</b>
 
         </Modal.Body>
         <Modal.Footer>

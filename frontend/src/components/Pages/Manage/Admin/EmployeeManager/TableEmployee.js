@@ -39,7 +39,7 @@ const TableEmployee =() =>{
             <span >List Employee:</span>
             <div className='func-button'>
               <CSVLink 
-              filename={"myListAccount.csv"}
+              filename={"EmployeeList.csv"}
               className="btn btn-primary"
               target="_blank"
               data={originList}>

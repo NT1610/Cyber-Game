@@ -7,19 +7,19 @@ import { toast } from 'react-toastify';
 
 const ModalAddNew = (props) => {
   const [show, setShow] = useState(false);
-  const [Account,setAccount]=useState("");
+  const [Account,setAccount]=useState(0);
   const [Name,setName]=useState("");
   const [Birth,setBirth]=useState("");
   const [ID,setID]=useState("");
   const [Phone,setPhone]=useState("");
   const [Position,setPosition]=useState("");
-  const [Salray,setSalray]=useState("");
+  const [Salray,setSalray]=useState(0);
 
   const handleSaveAccount = async()=>{
-  let res = await postCreateEmployee(parseInt(Account),Name,Birth,ID,Phone,Position,parseInt(Salray));
+  let res = await postCreateEmployee(Account,Name,"2024-01-11",ID,Phone,Position,Salray);
 
     console.log(">>>> check res: ",res)
-    console.log('>>check input',parseInt(Account),Birth,Name,ID,Phone,Position,parseInt(Salray))
+    console.log('>>check input >>',parseInt(Account),Birth,Name,ID,Phone,Position,parseInt(Salray))
     if(res&& res.accountID){
         handleClose();
         setAccount('');

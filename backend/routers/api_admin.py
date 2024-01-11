@@ -123,7 +123,7 @@ async def update_employee(
 
 
 @router.delete(
-    "/employee/{employee_id}", response_model=Employee, status_code=status.HTTP_200_OK
+    "/employee/{accountID}", response_model=Employee, status_code=status.HTTP_200_OK
 )
 async def delete_employee(
     accountID: int, current_user: models.Account = Depends(oauth2.get_current_user)

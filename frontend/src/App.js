@@ -26,7 +26,6 @@ function App() {
       position="top-right"
       autoClose={1000}
       />
-      <Footer/>
     </div>
   );
 }

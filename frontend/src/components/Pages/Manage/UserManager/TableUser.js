@@ -6,6 +6,8 @@ import ReactPaginate from 'react-paginate';
 import ModalAddNew from './ModalAddNew';
 import ModalEdit from './ModalEdit';
 import ModalDelete from './ModalDelete';
+import ModalAddMoney from './ModalAddMoney';
+import ModalTranfer from './ModalTranfer';
 import { CSVLink } from "react-csv";
 import '../../../../scss/Table.scss'
 
@@ -80,6 +82,12 @@ const TableUsers =() =>{
                         <td>{item.phone}</td>
                         <td>{item.birth}</td>
                         <td>
+                          <ModalAddMoney
+                          item={item}
+                          />
+                          <ModalTranfer
+                          item={item}
+                          />
                           <ModalEdit 
                           item={item}
                           />

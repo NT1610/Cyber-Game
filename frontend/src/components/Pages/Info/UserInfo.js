@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 
 const UserInfo =() =>{
     const [userInfo, setUserInfo] = useState([]);
+    const [password, setPassword] = useState();
     const [timeLeft, setTimeLeft] = useState(3665); // Thời gian đếm ngược ban đầu là 3665 giây (1 giờ, 1 phút và 5 giây)
     const decoded= jwtDecode(localStorage.access_token);
 
@@ -55,7 +56,15 @@ const UserInfo =() =>{
             <p>Loading user info...</p>
           )}
           </Row>
+          
           <div>
+          <h2 className="mb-3">
+                    <label for="exampleInputEmail1" className="form-label">Change Password</label>
+                    <input type="text" 
+                    className="form-control"
+                    onChange={(event) => setPassword(event.target.value)}
+                    />
+            </h2>
             <h1>Thời gian còn lại: {hours} giờ {minutes} phút {seconds} giây</h1>
           </div>
         </div>
