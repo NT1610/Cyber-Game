@@ -63,6 +63,16 @@ const putUpdateComputer =(connect,computer,comID) =>{
   }
   )
 }
+const putUpdatePass =(account_id,account,password,role) =>{
+  return axios.put(`/employee/account/${account_id}`,{account,password,role},
+  {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+  }
+  )
+}
 
 
-export {fetchUserInfo,postCreateOrder,postCreateReciept,fetchAllComputer,putUpdateComputer,fetchConnect};
+
+export {fetchUserInfo,postCreateOrder,postCreateReciept,fetchAllComputer,putUpdateComputer,fetchConnect,putUpdatePass};
