@@ -1,5 +1,7 @@
 
 import '../../../scss/Table.scss'
+import '../../../scss/home.scss'
+
 import {jwtDecode} from "jwt-decode";
 import { useEffect,useState } from 'react';
 import { fetchUserInfo } from '../../services/UserService';
@@ -81,14 +83,14 @@ const Home =() =>{
   }
 
   return(
-    <>
+    <div className='container'>
       <>Hello this is home page</>
       <Time></Time>
       <div>
         <button onClick={handleClick}>Bấm vào đây đã chọn máy</button>
 
       </div>
-    </>
+    </div>
   )
 
 }

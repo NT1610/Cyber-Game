@@ -109,9 +109,9 @@ async def create_employee(
     return employee_services.create_employee(employee)
 
 
-@router.put("/employee/{employee_id}", response_model=Employee, status_code=200)
+@router.put("/employee/{accountID}", response_model=Employee, status_code=200)
 async def update_employee(
-    employee_id: int,
+    accountID: int,
     employee: Employee,
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
@@ -119,20 +119,20 @@ async def update_employee(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
         )
-    return employee_services.update_employee(employee_id, employee)
+    return employee_services.update_employee(accountID, employee)
 
 
 @router.delete(
     "/employee/{employee_id}", response_model=Employee, status_code=status.HTTP_200_OK
 )
 async def delete_employee(
-    employee_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
+    accountID: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
     if current_user.role != "Admin":
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't admin"
         )
-    return employee_services.delete_employee(employee_id)
+    return employee_services.delete_employee(accountID)
 
 
 @router.get("/work", response_model=List[Work], status_code=status.HTTP_200_OK)

@@ -7,6 +7,7 @@ import { useContext, useEffect } from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleRefresh } from './Redux/actions/userAction';
+import Footer from './components/Common/Footer';
 
 function App() {
   const dispatch =useDispatch();
@@ -20,13 +21,12 @@ function App() {
     <div className='app-container'>
       
       <Header/>
-      <Container>
         <AppRoutes></AppRoutes>
-      </Container>
       <ToastContainer
       position="top-right"
       autoClose={1000}
       />
+      <Footer/>
     </div>
   );
 }
