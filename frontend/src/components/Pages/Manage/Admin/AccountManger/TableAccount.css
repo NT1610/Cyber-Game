@@ -1,0 +1,48 @@
+/* .Account-container{
+    height: 100vh;
+    background-color: black;
+} */
+.header{
+    margin-top: 50px;
+}
+.list-account{
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: yellow;
+}
+.func-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .table {
+    color: #9fffff;
+  }
+  
+  .sort-header {
+    font-weight: bold;
+    color: #9fffff;
+  }
+  
+  
+  .table-hover tbody tr:hover {
+    background-color: black;
+  }
+.td{
+    color: #9fffff;
+  }
+
+.element{
+    color: #9fffff;
+}
+
+.customize-table tbody tr:nth-of-type(odd) {
+    background-color: black;
+  }
+  
+  .customize-table {
+    border-color: #000;
+  }
+td{
+    background-color: #000;
+}

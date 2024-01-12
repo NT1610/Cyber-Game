@@ -16,13 +16,13 @@ const OrderList =() =>{
   
     useEffect(()=>{
       getUsers();
-    },[originList])
+    },[])
   
   
     const getUsers= async()=>{
       let res = await fetchAllOrder();
       if(res){
-        setOriginList(res.sort((a, b) => new Date( a.orderTime) - new Date( a.orderTime) ))
+        setOriginList(res.sort((a, b) => ( a.orderID) - ( b.orderID)))
       }
     }
 
@@ -78,7 +78,7 @@ const OrderList =() =>{
                 originList.map((item,index) =>{
                   return(
                     <tr key={`user${index}`}>
-                        <td>{index}</td>
+                        <td>{item.orderID}</td>
                         <td>{item.userID}</td>
                         <td>{item.foodID}</td>
                         <td>{item.quantity}</td>
@@ -90,7 +90,7 @@ const OrderList =() =>{
                           />
                           <ModalDelete                      
                           item={item}
-                          index={index}
+                          index={item.orderID}
                           />
                         </td>
                   </tr>

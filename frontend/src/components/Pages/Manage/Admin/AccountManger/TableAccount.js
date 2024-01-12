@@ -8,6 +8,7 @@ import ModalEdit from './ModalEdit';
 import ModalDelete from './ModalDelete';
 import { CSVLink } from "react-csv";
 import '../../../../../scss/Table.scss'
+import style from './TableAccount.css'
 
 
 const TableAccount =() =>{
@@ -16,7 +17,7 @@ const TableAccount =() =>{
   
     useEffect(()=>{
       getUsers();
-    },[originList])
+    },[])
   
   
     const getUsers= async()=>{
@@ -27,11 +28,9 @@ const TableAccount =() =>{
     }
 
       return (
-          <>
-          <div className='col-12 col-sm-4 my-3'>
-          </div>
-          <div className="d-sm-flex justify-content-between">
-            <span >List Account:</span>
+        <div className='Account-container'>
+          <div className="header">
+            <div className='list-account'>List Account:</div>
             <div className='func-button'>
               <CSVLink 
               filename={"myListAccount.csv"}
@@ -72,9 +71,9 @@ const TableAccount =() =>{
                 originList.map((item,index) =>{
                   return(
                     <tr key={`user${index}`}>
-                        <td>{item.accountID}</td>
-                        <td>{item.account}</td>
-                        <td>{item.role}</td>
+                        <td style={{color: '#9fffff'}}>{item.accountID}</td>
+                        <td style={{color: '#9fffff'}}>{item.account}</td>
+                        <td style={{color: '#9fffff'}}>{item.role}</td>
 
                         <td>
                           <ModalEdit 
@@ -109,7 +108,7 @@ const TableAccount =() =>{
           activeClassName="active"
           renderOnZeroPageCount={null}
           />
-          </>
+          </div>
         );
 }
 

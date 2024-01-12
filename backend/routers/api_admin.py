@@ -286,7 +286,7 @@ async def create_reciept(
     return receipt_services.create_receipt(receipt)
 
 
-@router.get("/order", response_model=List[Order], status_code=status.HTTP_200_OK)
+@router.get("/order", response_model=List[Order_out], status_code=status.HTTP_200_OK)
 async def read_order(
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):

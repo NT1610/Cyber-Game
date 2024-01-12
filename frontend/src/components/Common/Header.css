@@ -1,0 +1,26 @@
+.cyber-game{
+    margin-left:20px !important;
+}
+.custom-navbar {
+    background-color: #000;
+  }
+  
+.custom-navbar-brand {
+    color: #9fffff !important;
+    display: flex;
+}
+.nav-link{
+    margin-left: 10px;
+    color: #9fffff !important;
+}
+#custom-nav-dropdown{
+    color: #9fffff;
+    margin-right:70px ;}
+
+.dropdown-item {
+    color: #000;
+    text-align: right !important;
+}
+.custom-nav-dropdown{
+    margin-right: 10px !important;
+}
