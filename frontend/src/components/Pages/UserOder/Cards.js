@@ -26,7 +26,6 @@ const Cards = ({item, handleClick}) => {
             <img src={listImage[id-1]} alt="Image" />
         </div>
         <div className="details">
-            <p>{id}</p>
             <p>{title}</p>
             <p>{author}</p>
             <p>{price} VNĐ</p>

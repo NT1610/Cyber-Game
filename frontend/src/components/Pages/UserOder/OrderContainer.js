@@ -42,7 +42,7 @@ const OrderContainer = () => {
 	}
 
   return (
-	<React.Fragment>
+	<div>
 		<Navbar size={cart.length} setShow={setShow} />
 		{
 			show ? <Amazon handleClick={handleClick} /> : <Cart cart={cart} account={account} setCart={setCart} handleChange={handleChange} setAccount={setAccount} />
@@ -50,7 +50,7 @@ const OrderContainer = () => {
 		{
 			warning && <div className='warning'>Item is already added to your cart</div>
 		}
-	</React.Fragment>
+	</div>
   )
 }
 

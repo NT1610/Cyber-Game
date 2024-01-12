@@ -11,6 +11,15 @@ const fetchAllAccount =()=>{
     }
     )
 }
+const fetchAllAccountUser =()=>{
+    return axios.get("/employee/account", 
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 const fetchAccount =(account_id)=>{
     return axios.get(`/admin/userinfo/account/${account_id}`, 
     {
@@ -131,6 +140,15 @@ const postCreateAccount =(account,password,role)=>{
     }
     )
 }
+const postCreateAccountUser =(account,password,role)=>{
+    return axios.post("/employee/account",{account,password,role},
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 const postCreateComputer =(area,status)=>{
     return axios.post("/admin/computer",{area,status},
     {
@@ -162,6 +180,16 @@ const postCreateEmployee = (accountID,name,birth,id,phone,position,salary) =>{
 
 const putUpdateAccount =(id,account,password,role) =>{
     return axios.put(`/admin/account/${id}`,{account,password,role},
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+
+const putUpdateAccountUser =(id,account,password,role) =>{
+    return axios.put(`/employee/account/${id}`,{account,password,role},
     {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -221,6 +249,15 @@ const deleteAccount = (id) =>{
     }
     )
 }
+const deleteAccountUser = (id) =>{
+    return axios.delete(`/employee/account/${id}`,
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 const deleteUser= (id) =>{
     return axios.delete(`/admin/userinfo/${id}`,
     {
@@ -264,4 +301,4 @@ const loginApi =(request) => {
 
 
 
-export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee,putUpdateEmployee,postCreateEmployee,deleteEmployee,deleteOrder,fetchAccount};
+export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee,putUpdateEmployee,postCreateEmployee,deleteEmployee,deleteOrder,fetchAccount,fetchAllAccountUser,putUpdateAccountUser,postCreateAccountUser,deleteAccountUser};

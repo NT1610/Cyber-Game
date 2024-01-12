@@ -22,6 +22,10 @@ router = APIRouter(prefix="/user", tags=["User"])
 async def read_userinfo_id(
     user_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm hiển thị ra các thuộc tính của người dùng có mã {user_id}
+    - Trả về 200 là thành công
+    """
     return user_services.get_user_by_id(user_id)
 
 
