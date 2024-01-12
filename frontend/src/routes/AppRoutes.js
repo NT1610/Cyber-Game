@@ -15,6 +15,7 @@ import TableEmployee from "../components/Pages/Manage/Admin/EmployeeManager/Tabl
 import ComputerToChoose from "../components/Pages/ChooseComputer/ListComputers";
 import OrderList from "../components/Pages/Manage/OrderList/OrderList";
 import Reciepts from "../components/Pages/Manage/Admin/RecieptManager/Reciepts";
+import TableAccount from "../components/Pages/Manage/Admin/ManageAccountUser/TableAccount";
 // import Navbar from "../components/Pages/UserOder/Navbar";
 
 const AppRoutes = () =>{
@@ -54,6 +55,11 @@ const AppRoutes = () =>{
                 <Route path='/OrderedList' element={
                     <PrivateRoutesEmployee>
                         <OrderList/>
+                    </PrivateRoutesEmployee>}
+                />
+                <Route path='/manageAccountUser' element={
+                    <PrivateRoutesEmployee>
+                        <TableAccount/>
                     </PrivateRoutesEmployee>}
                 />
                 {/* user */}

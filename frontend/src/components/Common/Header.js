@@ -97,7 +97,7 @@ const Header=({size, setShow})=>{
                       Manage User
                     </NavLink>
                     <NavLink className='nav-link' to="/computer">
-                      Computer
+                       Manager Computer
                     </NavLink>
                     <NavLink className='nav-link' to="/reciept">
                       Receipt List
@@ -108,13 +108,16 @@ const Header=({size, setShow})=>{
                   </>
                 )}
                 {/* Employee */}
+                <NavLink className='nav-link' to="/manageAccountUser">
+                      Manage Account
+                    </NavLink>
                 {decoded.role === 'Employee' && (
                   <>
-                    <NavLink className='nav-link' to="/manageUser">
-                      Manage User
+                    <NavLink className='nav-link' to="/OrderedList">
+                    Orderer List
                     </NavLink>
                     <NavLink className='nav-link' to="/computer">
-                      Computer
+                    Manager Computer
                     </NavLink>
                   </>
                 )}
@@ -136,7 +139,7 @@ const Header=({size, setShow})=>{
                 </Navbar.Text>
               )}
               <Nav>
-                <NavDropdown title="Dropdown" id="custom-nav-dropdown">
+                <NavDropdown title="OPTION" id="custom-nav-dropdown">
                   {user && user.auth === true && (
                     <NavLink className='dropdown-item' to="/info">
                       Info

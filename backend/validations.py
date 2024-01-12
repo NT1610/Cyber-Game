@@ -115,11 +115,31 @@ class Work(MyBaseModel):
     endTime: datetime
 
 
+class Work_out(MyBaseModel):
+    workID: int
+    employeeID: int
+    status: str
+    startTime: datetime
+    endTime: datetime
+
+
 class Connect(MyBaseModel):
     userID: int
     comID: int
     startTime: datetime
 
+
+class Event(MyBaseModel):
+    name: str
+    startime: datetime
+    endtime: datetime
+
+
+class Event(MyBaseModel):
+    eventID: int
+    name: str
+    startime: datetime
+    endtime: datetime
 
 class Login(MyBaseModel):
     account: str
@@ -134,15 +154,3 @@ class Token(MyBaseModel):
 class TokenData(MyBaseModel):
     accountID: Optional[str] = None
     role: str
-
-# class Event(MyBaseModel):
-#     name: str
-#     startime: datetime
-#     endtime: datetime
-
-
-# class Event(MyBaseModel):
-#     eventID: int
-#     name: str
-#     startime: datetime
-#     endtime: datetime

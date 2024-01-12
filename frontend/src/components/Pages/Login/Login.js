@@ -56,8 +56,9 @@ const Login = () =>{
     // };  
     return (
         <div className ='login-container col-12 col-sm-4 '>
+                        {/* <div className="text">Email or Username</div> */}
+
             <span className='title'>LOGIN</span>
-            <div className="text">Email or Username</div>
             <input 
                 placeholder="username/email" 
                 className="form-control"

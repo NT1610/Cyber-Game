@@ -27,6 +27,10 @@ router = APIRouter(prefix="/employee", tags=["Employee"])
 
 @router.get("/account", response_model=List[Account_out], status_code=200)
 async def read_account(current_user: models.Account = Depends(oauth2.get_current_user)):
+    """
+    - Hàm lấy danh sách các tài khoản
+    - Trả về 200 là thành công, 422 là lỗi truyền vào
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -41,6 +45,10 @@ async def read_account(current_user: models.Account = Depends(oauth2.get_current
 async def create_account(
     account: Account, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm nhận tên tài khoản (account), mật khẩu (password) để tạo tài khoản mới cho người dùng
+    - Trả về 200 là thành công, 422 là lỗi truyền vào, 400 là không có quyền thay đổi
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -61,6 +69,10 @@ async def update_account(
     account: Account,
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
+    """
+    - Hàm nhận tên tài khoản (account), mật khẩu (password), cập nhật người dùng có tài khoản có mã {account_id}
+    - Trả về 200 là thành công, 422 là lỗi truyền vào, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -79,6 +91,10 @@ async def update_account(
 async def delete_account(
     account_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm nhận accountID để xóa tài khoản của người dùng
+    - Trả về 200 là thành công, 422 là lỗi truyền vào, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -91,6 +107,10 @@ async def delete_account(
 async def read_user(
     user_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm hiển thị ra tất cả user 
+    - Trả về 200 là thành công, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -107,6 +127,10 @@ async def read_user(
 async def read_userinfo_by_account_id(
     account_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm hiển thị tài khoản có mã {acoount_id}
+    - Trả về 200 là thành công, 400 là không có quyền
+    """
     if current_user.role != "Employee":
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="can't employee"
@@ -120,6 +144,11 @@ async def read_userinfo_by_account_id(
 async def create_user(
     usserInfo: UserInfo, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm nhận mã tài khoản (accounID), tên người dùng (name), ngày sinh (birth), mã căn cước
+    (id), số điện thoại (phone) và số tiền nhập vào (money) để tạo user mới
+    - Trả về 201 là thành công, 422 là lỗi định dạng, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -138,6 +167,11 @@ async def update_user(
     userInfo: UserInfo,
     current_user: models.Account = Depends(oauth2.get_current_user),
 ):
+    """
+    - Hàm nhận mã tài khoản (accounID), tên người dùng (name), ngày sinh (birth), mã căn cước
+    (id), số điện thoại (phone) và số tiền nhập vào (money) để cập nhật user có mã {userInfo_id}
+    - Trả về 200 là thành công, 422 là lỗi định dạng, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -154,6 +188,10 @@ async def update_user(
 async def delete_user(
     userInfo_id: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm xóa người dùng có mã {userInfo_id}
+    - Trả về 200 là thành công, 422 là lỗi định dạng, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -168,6 +206,10 @@ async def delete_user(
 async def read_reciept(
     reciept_ID: int, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm để xem các hóa đơn để được giao dịch
+    - Trả về 200 là thành công, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -182,6 +224,11 @@ async def read_reciept(
 async def create_reciept(
     receipt: Receipt, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm nhận mã người dùng (userID), mô tả thanh toán (description), số tiền thanh toán
+    (money), thời gian giao dịch (time) để tạo một giao dịch mới
+    - Trả về 201 là thành công, 422 là lỗi định dạng, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -194,6 +241,10 @@ async def create_reciept(
 async def read_order_id(
     order_id, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm trả về các thuộc tính của order có mã {oder_id}
+    - Trả về 200 là thành công, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
@@ -206,6 +257,11 @@ async def read_order_id(
 async def create_order(
     order: Order, current_user: models.Account = Depends(oauth2.get_current_user)
 ):
+    """
+    - Hàm nhận mã người dùng (userID), mã món ăn (foodID), số lượng đặt (quantity),
+    thời gian đặt (orderTime), tình trạng đặt (status) để tạo một order mới
+    - Trả về 201 là thành công, 422 là lỗi định dạng, 400 là không có quyền
+    """
     role = ["Admin", "Employee"]
     if current_user.role not in role:
         raise HTTPException(
