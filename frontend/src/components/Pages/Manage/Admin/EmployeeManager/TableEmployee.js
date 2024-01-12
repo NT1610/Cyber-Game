@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import { fetchAllEmployee ,fetchAllWork,fetchWork} from '../../../../services/AdminService';
 import ModalAddNew from './ModalAddNew';
-import ModalEdit from './ModalEdit';
+// import ModalEdit from './ModalEdit';
 import ModalDelete from './ModalDelete';
 import { CSVLink } from "react-csv";
 import '../../../../../scss/Table.scss'
@@ -88,9 +88,9 @@ const TableEmployee =() =>{
                         <td>{item.position}</td>
                         <td>{item.salary}</td>
                         <td>
-                          <ModalEdit 
+                          {/* <ModalEdit 
                           item={item}
-                          />
+                          /> */}
                           <ModalDelete                      
                           item={item}
                           />
@@ -105,7 +105,7 @@ const TableEmployee =() =>{
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >List Employee:</span>
+            <span >List Work:</span>
             <div className='func-button'>
               <CSVLink 
               filename={"WorkList.csv"}
@@ -115,7 +115,7 @@ const TableEmployee =() =>{
               <i className='fa-solid fa-file-arrow-down'/>
               Export File
               </CSVLink>
-              <ModalAddNew/>
+              {/* <ModalAddNew/> */}
             </div>
           </div>
           <div className='customize-table'>

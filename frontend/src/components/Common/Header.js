@@ -73,119 +73,86 @@ const Header=({size, setShow})=>{
       console.log('check put ',put)
     }
 
-    return(
-    <Navbar expand="lg" 
-    className="bg-body-tertiary" 
-    bg='dark'
-    //data-bs-theme={window.location.pathname === '/login' ? 'dark' :''}
-    > 
-    <Container >
-
-      <NavLink to="/" className='navbar-brand'>
-              <img
-              src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-              />
-          CYBER GAME
-      </NavLink>
-      { (user && user.auth || window.location.pathname ==='/') &&
-        <>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" >
-              <NavLink className='nav-link' to="/">
-                  Home
-              </NavLink>
-              {/* admin */}
-              {decoded.role==='Admin' &&
-                <NavLink className='nav-link' to="/manageAccount">
-                  Manage Account
-                </NavLink>
-              }
-              {(decoded.role==='Admin') &&
-                <NavLink className='nav-link' to="/manageEmployee">
-                  Manage Employee
-                </NavLink>
-              }
-              {(decoded.role==='Admin') &&
-                <NavLink className='nav-link' to="/manageUser">
-                  Manage User
-                </NavLink>
-              }
-              {(decoded.role==='Admin') &&
-                <NavLink className='nav-link' to="/computer">
-                  Computer
-                </NavLink>
-              }
-              {(decoded.role==='Admin') &&
-                <NavLink className='nav-link' to="/reciept">
-                  Reciept List
-                </NavLink>
-              }
-              {(decoded.role==='Admin' || decoded.role==='Employee') &&
-                <NavLink className='nav-link' to="/OrderedList">
-                  Order List
-                </NavLink>
-              }
-
-              {/* employee */}
-              {decoded.role==='Employee' &&
-                <NavLink className='nav-link' to="/manageUser">
-                  Manage User
-                </NavLink>
-              }
-              {decoded.role==='Employee' &&
-                <NavLink className='nav-link' to="/computer">
-                  Computer
-                </NavLink>
-              }
-
-              {/* user */}
-              {decoded.role==='User' && localStorage.chose ==='true' &&
-                <NavLink className='nav-link' to="/user">
-                  ORDER Đồ Ăn
-                </NavLink>
-              }
-              {decoded.role==='User' &&
-                <NavLink className='nav-link' to="/chooseCOMP">
-                  Chọn máy
-                </NavLink>
-              }
-
-          </Nav>
-
-            {user && user.userName &&
-              <Navbar.Collapse className="justify-content-end">
+    return (
+      <Navbar className='custom-navbar fixed-top' bg="dark" variant="dark" expand="md">
+        <Navbar.Brand className='custom-navbar-brand' href="/">
+          <img src={logo} width="30" height="30" margin-right="20" className="d-inline-block align-top" alt="React Bootstrap logo" />
+          <div className='cyber-game'>CYBER GAME</div>
+        </Navbar.Brand>
+        {(user && user.auth || window.location.pathname === '/') && (
+          <>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                {/* Admin */}
+                {decoded.role === 'Admin' && (
+                  <>
+                    <NavLink className='nav-link' to="/manageAccount">
+                      Manage Account
+                    </NavLink>
+                    <NavLink className='nav-link' to="/manageEmployee">
+                      Manage Employee
+                    </NavLink>
+                    <NavLink className='nav-link' to="/manageUser">
+                      Manage User
+                    </NavLink>
+                    <NavLink className='nav-link' to="/computer">
+                      Computer
+                    </NavLink>
+                    <NavLink className='nav-link' to="/reciept">
+                      Receipt List
+                    </NavLink>
+                  </>
+                )}
+                {/* Employee */}
+                {decoded.role === 'Employee' && (
+                  <>
+                    <NavLink className='nav-link' to="/manageUser">
+                      Manage User
+                    </NavLink>
+                    <NavLink className='nav-link' to="/computer">
+                      Computer
+                    </NavLink>
+                  </>
+                )}
+                {/* User */}
+                {decoded.role === 'User' && localStorage.chose === 'true' && (
+                  <NavLink className='nav-link' to="/user">
+                    ORDER Đồ Ăn
+                  </NavLink>
+                )}
+                {decoded.role === 'User' && (
+                  <NavLink className='nav-link' to="/chooseCOMP">
+                    Chọn máy
+                  </NavLink>
+                )}
+              </Nav>
+              {user && user.userName && (
                 <Navbar.Text>
-                  WELCOME:<b>{user.userName}</b> 
+                  WELCOME:<b>{user.userName}</b>
                 </Navbar.Text>
-
-              </Navbar.Collapse>
-            } 
-            
-
-            <Nav>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                {user && user.auth===true
-                  && <NavLink className=' dropdown-item' to="/info">Info</NavLink>
-                }
-                {user && user.auth===true
-                  ? <NavDropdown.Item onClick={handleLogout}> Logout </NavDropdown.Item>
-                  : <NavLink className=' dropdown-item' to="/login"> Log In</NavLink>
-                }
-                {/* <NavDropdown.Item onClick={handleLogout}> Logout </NavDropdown.Item>
-                <NavLink className=' dropdown-item' to="/login"> Log In</NavLink> */}
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-        </Navbar.Collapse>
-        </>
-      }
-    </Container>
-  </Navbar>)
-}
-export default Header;
+              )}
+              <Nav>
+                <NavDropdown title="Dropdown" id="custom-nav-dropdown">
+                  {user && user.auth === true && (
+                    <NavLink className='dropdown-item' to="/info">
+                      Info
+                    </NavLink>
+                  )}
+                  {user && user.auth === true ? (
+                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                  ) : (
+                    <NavLink className='dropdown-item' to="/login">
+                      Log In
+                    </NavLink>
+                  )}
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </>
+        )}
+      </Navbar>
+    )};
+    export default Header;

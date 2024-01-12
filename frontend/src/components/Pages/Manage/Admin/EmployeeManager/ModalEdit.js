@@ -42,6 +42,10 @@ const ModalEdit = (props) => {
   }
   useEffect(()=>{
     if(show){
+                        // <td>{item.employeeID}</td>
+                        // <td>{item.status}</td>
+                        // <td>{item.startTime}</td>
+                        // <td>{item.endTime}</td>
         setAccount(dataUserEdit.account)
         setRole(dataUserEdit.role)
         setId(dataUserEdit.accountID)

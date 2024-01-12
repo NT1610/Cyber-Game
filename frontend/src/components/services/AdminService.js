@@ -140,6 +140,15 @@ const postCreateWork = (employeeID,status,startTime,endTime) =>{
     }
     )
 }
+const postCreateEmployee = (accountID,name,birth,id,phone,position,salary) =>{
+    return axios.post("/admin/employee",{accountID,name,birth,id,phone,position,salary},
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 //put method
 
 const putUpdateAccount =(id,account,password,role) =>{
@@ -173,6 +182,16 @@ const putUpdateComputer =(connect,computer,comID) =>{
 
 const putUpdateWork =(employeeID,status,startTime,endTime) =>{
     return axios.put(`/admin/work/${employeeID}`,{employeeID,status,startTime,endTime},
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+
+const putUpdateEmployee =(accountID,name,birth,id,phone,position,salary) =>{
+    return axios.put(`/admin/work/${accountID}`,{accountID,name,birth,id,phone,position,salary},
     {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -218,4 +237,4 @@ const loginApi =(request) => {
 
 
 
-export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee};
+export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee,putUpdateEmployee,postCreateEmployee};

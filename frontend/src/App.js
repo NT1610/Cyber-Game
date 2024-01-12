@@ -7,6 +7,8 @@ import { useContext, useEffect } from 'react';
 import AppRoutes from './routes/AppRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleRefresh } from './Redux/actions/userAction';
+import Footer from './components/Common/Footer';
+import style from "./app.css"
 
 function App() {
   const dispatch =useDispatch();
@@ -25,6 +27,7 @@ function App() {
       position="top-right"
       autoClose={1000}
       />
+      {/* <Footer/> */}
     </div>
   );
 }

@@ -1,13 +1,22 @@
 /* Home.css */
-body{
+html{
+    margin: 0px;
+}
+.home{
     background-color: black;
+    margin-left: 0px;
+    color: #9fffff;
 }
 .poster {
     width: 100vw;
     display: block;
-    margin: 0;
+    margin-top: 50px;
   }
-  
+.Cyber-text{
+    font-size: 60px;
+    text-align: center;
+    color: yellow;
+    }
   button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -19,4 +28,66 @@ body{
   
   button:hover {
     background-color: #0056b3;
+  }
+  .inside-cyber {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Cyber {
+    flex: 1;
+    margin: 5px;
+    margin-top: 10px;
+    max-width: 30vw; /* Each image will take up one-third of the viewport width */
+    height: auto;
+  }
+
+  .Monitor{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .picMonitor {
+    width: 50%;
+  }
+  
+  .textMonitor {
+    margin-left: 10px;
+    flex-grow: 1;
+    text-align:justify;
+    justify-content: center;
+    align-items: center;
+  }
+.Gaming{
+    color: yellow;
+    font-style: italic;
+}
+.title{
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}
+.description{
+    font-style: italic;
+    font-size: 15px;
+    opacity: 0.5;
+}
+
+.Gear{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .picGear {
+    width: 50%;
+    
+  }
+
+  .Food {
+    flex: 1;
+    margin-top: 10px;
+    height: 150px;
+    width: 12.5vw; /* Each image will take up one-third of the viewport width */
   }

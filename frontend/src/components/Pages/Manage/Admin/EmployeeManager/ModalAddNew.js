@@ -1,25 +1,30 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { postCreateAccount } from '../../../../services/AdminService';
+import { postCreateEmployee } from '../../../../services/AdminService';
 import { toast } from 'react-toastify';
 
 
 const ModalAddNew = (props) => {
   const [show, setShow] = useState(false);
   const [Account,setAccount]=useState("");
-  const [Role,setRole]=useState("");
-  const [Password,setPassword]=useState("");
-  const handleSaveAccount = async()=>{
-  let res = await postCreateAccount(Account,Password,Role);
+  const [Name,setName]=useState("");
+  const [Birth,setBirth]=useState("");
+  const [ID,setID]=useState("");
+  const [Phone,setPhone]=useState("");
+  const [Position,setPosition]=useState("");
+  const [Salray,setSalray]=useState("");
 
+  const handleSaveAccount = async()=>{
+  let res = await postCreateEmployee(parseInt(Account),Name,Birth,ID,Phone,Position,parseInt(Salray));
 
     console.log(">>>> check res: ",res)
+    console.log('>>check input',parseInt(Account),Birth,Name,ID,Phone,Position,parseInt(Salray))
     if(res&& res.accountID){
         handleClose();
         setAccount('');
-        setRole('');
-        setPassword('');
+        setName('');
+        setBirth('');
         toast.success("An Account Added")
     }
     else{
@@ -33,7 +38,7 @@ const ModalAddNew = (props) => {
     <>
       <Button onClick={handleShow} className='btn btn-success'>
       <i className='fa-solid fa-circle-plus'/>
-            Add Account
+            Add Employee
       </Button>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
@@ -43,7 +48,7 @@ const ModalAddNew = (props) => {
 
         <form>
         <div className="mb-3">
-            <label className="form-label">Username</label>
+            <label className="form-label">accountID</label>
             <input type="text" 
             className="form-control"
             value={Account}
@@ -52,20 +57,52 @@ const ModalAddNew = (props) => {
         </div>
 
         <div className="mb-3">
-            <label className="form-label">Role</label>
+            <label className="form-label">Name</label>
             <input type="text"
             className="form-control"
-            value={Role}
-            onChange={(event) => setRole(event.target.value)}
+            value={Name}
+            onChange={(event) => setName(event.target.value)}
              />
         </div>
 
         <div className="mb-3">
-            <label className="form-label">Password</label>
+            <label className="form-label">Birth</label>
             <input type="text"
             className="form-control"
-            value={Password}
-            onChange={(event) => setPassword(event.target.value)}
+            value={Birth}
+            onChange={(event) => setBirth(event.target.value)}
+            />
+        </div>
+        <div className="mb-3">
+            <label className="form-label">ID</label>
+            <input type="text"
+            className="form-control"
+            value={ID}
+            onChange={(event) => setID(event.target.value)}
+            />
+        </div>
+        <div className="mb-3">
+            <label className="form-label">Phone</label>
+            <input type="text"
+            className="form-control"
+            value={Phone}
+            onChange={(event) => setPhone(event.target.value)}
+            />
+        </div>
+        <div className="mb-3">
+            <label className="form-label">Position</label>
+            <input type="text"
+            className="form-control"
+            value={Position}
+            onChange={(event) => setPosition(event.target.value)}
+            />
+        </div>
+        <div className="mb-3">
+            <label className="form-label">Salary</label>
+            <input type="text"
+            className="form-control"
+            value={Salray}
+            onChange={(event) => setSalray(event.target.value)}
             />
         </div>
 

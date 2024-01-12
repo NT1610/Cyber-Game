@@ -55,10 +55,10 @@ def update_employee(employee_id: int, employee: Employee):
     return db_employee
 
 
-def delete_employee(employee_id):
+def delete_employee(accountID):
     employee_to_delete = (
         db.query(models.Employee)
-        .filter(models.Employee.employeeID == employee_id)
+        .filter(models.Employee.accountID == accountID)
         .first()
     )
     if employee_to_delete is None:
