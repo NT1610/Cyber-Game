@@ -4,6 +4,7 @@ import {fetchUserInfo} from '../../services/UserService';
 import { Row } from 'react-bootstrap';
 import '../../../scss/Table.scss'
 import { jwtDecode } from 'jwt-decode';
+import ModalChangePass from './ModalChangePass';
 
 const UserInfo =() =>{
     const [userInfo, setUserInfo] = useState([]);
@@ -55,9 +56,14 @@ const UserInfo =() =>{
             <p>Loading user info...</p>
           )}
           </Row>
+          
           <div>
+            
             <h1>Thời gian còn lại: {hours} giờ {minutes} phút {seconds} giây</h1>
           </div>
+          <ModalChangePass
+          userID={userInfo.userID}
+          />
         </div>
     );
 }

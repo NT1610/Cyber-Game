@@ -11,6 +11,15 @@ const fetchAllAccount =()=>{
     }
     )
 }
+const fetchAccount =(account_id)=>{
+    return axios.get(`/admin/userinfo/account/${account_id}`, 
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 const fetchAllUser =()=>{
     return axios.get("/admin/userinfo/",
     {
@@ -230,6 +239,24 @@ const deleteComputer= (id) =>{
     }
     )
 }
+const deleteEmployee= (accountID) =>{
+    return axios.delete(`/admin/employee/${accountID}`,
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
+const deleteOrder= (orderID) =>{
+    return axios.delete(`/admin/order?orderID=${orderID}`,
+    {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+}
 //auth
 const loginApi =(request) => {
     return axios.post("/login",request)
@@ -237,4 +264,4 @@ const loginApi =(request) => {
 
 
 
-export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee,putUpdateEmployee,postCreateEmployee};
+export {fetchAllAccount,postCreateAccount,putUpdateAccount,deleteAccount,loginApi,fetchUserInfo,fetchAllComputer,fetchAllUser,postCreateUser,deleteUser,putUpdateUser,postCreateComputer,putUpdateComputer,deleteComputer,fetchAllEmployee,fetchAllOrder,fetchComputer,fetchAllReciept,fetchAllWork,fetchWork,postCreateWork,putUpdateWork,fetchEmployee,putUpdateEmployee,postCreateEmployee,deleteEmployee,deleteOrder,fetchAccount};

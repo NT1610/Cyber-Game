@@ -1,43 +1,37 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { deleteUser } from '../../../services/AdminService';
+import { deleteOrder } from '../../../services/AdminService';
 import { toast } from 'react-toastify';
 
 
 const ModalDelte = (props) => {
   const [show, setShow] = useState(false);
-  const [Account,setAccount]=useState("");
-  const [dataUserDelete,setDataUserDelete]=useState([])
 
   const {item}=props
-  const handleEditUser =(user) =>{
+  const {index}=props
+  const handleEditOrder =(user) =>{
     console.log(user)
-    setDataUserDelete(user)
   }
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
-    handleEditUser(item);
+    handleEditOrder(item);
   }
 
-  const handleDeleteUser = async() =>{
-        let res = await deleteUser(dataUserDelete.userID);
+  const handleDeleteOrder = async() =>{
+        let res = await deleteOrder(index);
         console.log(">>res: ",res)
         console.log(">>code: ",res.statusCode)
 
-        if(res && res.userID){
+        if(res && res.orderID){
             handleClose();
-            let string ='Del acc:'+String(dataUserDelete.account)
+            let string ='Del orrder:'+String(index)
             toast.success(string)
         }
   }
-  useEffect(()=>{
-    if(show){
-        setAccount(dataUserDelete.accountID)
-    }
-  },[dataUserDelete])
+
   return (
     <>
       <Button onClick={handleShow}                  
@@ -51,11 +45,10 @@ const ModalDelte = (props) => {
         <Modal.Body>
 
         <form >
-            Are You Sure To Delete User
+            Are You Sure To Delete Order
         </form>
         <br/>
-        <b>Account ID : {Account}</b>
-        <b> ID : {Account}</b>
+        <b> Order ID : {index}</b>
 
 
         </Modal.Body>
@@ -63,7 +56,7 @@ const ModalDelte = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <button type="submit" className="btn btn-primary" onClick={() => handleDeleteUser() }>Confirm</button>
+          <button type="submit" className="btn btn-primary" onClick={() => handleDeleteOrder() }>Confirm</button>
 
         </Modal.Footer>
       </Modal>

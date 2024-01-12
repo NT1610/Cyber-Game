@@ -102,6 +102,12 @@ const Header=({size, setShow})=>{
                     <NavLink className='nav-link' to="/reciept">
                       Receipt List
                     </NavLink>
+<<<<<<< HEAD
+=======
+                    <NavLink className='nav-link' to="/OrderedList">
+                    Orderer List
+                    </NavLink>
+>>>>>>> 50adfb820c6c5cb2ab2cd56bc7a3bde4098b0e6a
                   </>
                 )}
                 {/* Employee */}

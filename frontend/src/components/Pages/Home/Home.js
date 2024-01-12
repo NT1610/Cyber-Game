@@ -18,6 +18,10 @@ import comChien from "../menuImage/comChien.jpg"
 import oLong from "../menuImage/OLongVai.jpg" 
 import pepSI from "../menuImage/Pepsi.jpg"
 import style from './Home.css'
+<<<<<<< HEAD
+=======
+import LightCard from "./LightCard";
+>>>>>>> 50adfb820c6c5cb2ab2cd56bc7a3bde4098b0e6a
 
 
 
@@ -44,6 +48,7 @@ const Time = () =>{
 }
 const Home =() =>{
   const [pickedComp, setPickedComp] = useState("");
+
   const dispatch =useDispatch();
 
   useEffect(()=>{
@@ -124,16 +129,48 @@ const Home =() =>{
       </div>
       <div className="Cyber-text">
         Thực đơn đa dạng
+<<<<<<< HEAD
       </div>
       <div className = "Menu">
         <img className="Food" src = {dongXu} alt="Banh dong xu"></img>
+=======
+      </div >
+      <div className = "Menu ">
+        {/* <img className="Food" src = {dongXu} alt="Banh dong xu"></img>
+>>>>>>> 50adfb820c6c5cb2ab2cd56bc7a3bde4098b0e6a
         <img className="Food" src = {banhBao} alt = "Banh bao"></img>
         <img className="Food" src = {sandwich} alt = "sandwich"></img>
         <img className="Food" src = {bunBo} alt="Bun Bo"></img>
         <img className="Food" src = {bunBoNam} alt="Bun Bo Nam Bo"></img>
         <img className="Food" src = {comChien} alt="Com Chien"></img>
+<<<<<<< HEAD
         <img className="Food" src = {oLong} alt="O long"></img>
         <img className="Food" src = {pepSI} alt="Pepsi"></img>
+=======
+        <img className="Food" src = {oLong} alt="O long"></img> */}
+        <LightCard
+        src={dongXu}
+        alt={'Banh dong xu'}
+        />
+        <LightCard
+        src={banhBao}
+        alt={'Banh bao'}
+        />
+        <LightCard
+        src={sandwich}
+        alt={'Sandwitch'}
+        />
+        <LightCard
+        src={bunBo}
+        alt={'Bún Bò'}
+        />
+        <LightCard
+        src={comChien}
+        alt={'Cơm Chiên'}
+        />
+                
+        {/* <img className="Food" src = {pepSI} alt="Pepsi"></img> */}
+>>>>>>> 50adfb820c6c5cb2ab2cd56bc7a3bde4098b0e6a
       </div>
 
     </div>
