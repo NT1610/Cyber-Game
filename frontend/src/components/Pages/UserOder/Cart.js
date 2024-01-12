@@ -53,8 +53,8 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
                 cart[i].amount=1
             }
           } 
+        //   handlePrice();
         setCart(arr);
-        // handlePrice();
     }
     const handleRemoveAll = () =>{
         for (let i = 0; i < cart.length; i++) {
@@ -63,7 +63,7 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
         const arr =[];
         setCart(arr);
         setPrice(0)
-        // handlePrice();
+        handlePrice();
     }
     
 
@@ -112,8 +112,6 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
 
   return (
     <article>
-              <p>Thời gian hiện tại: {currentTime.toLocaleTimeString()}</p>
-      <p>Thời gian hiện tại: {formattedDateTime}</p>
         {
             cart?.map((item)=>(
                 <div className="cart_box" key={item.id}>

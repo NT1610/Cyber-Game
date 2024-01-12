@@ -5,6 +5,7 @@ import { Row } from 'react-bootstrap';
 import '../../../scss/Table.scss'
 import { jwtDecode } from 'jwt-decode';
 import ModalChangePass from './ModalChangePass';
+import style from './style.css'
 
 const UserInfo =() =>{
     const [userInfo, setUserInfo] = useState([]);
@@ -39,18 +40,58 @@ const UserInfo =() =>{
     // const pageCount = Math.ceil(totalUsers.length / itemsPerPage);
  
     return (
-        <div>
+        <div  className="user-info">
           <Row className="justify-content-center">
           {userInfo ? (
             <div>
                 <div></div>
                 <h2>User Info</h2>
-                <p>Name: {userInfo.name}</p>
-                <p>Birth: {userInfo.birth}</p>
-                <p>ID: {userInfo.id}</p>
-                <p>Phone: {userInfo.phone}</p>
-                <p>Money: {userInfo.money}</p>
-                <p>TIme start: {localStorage.timeStart}</p>
+                <fieldset>
+                <legend>Personal:</legend>
+                <div className="info-row">
+
+                  <label>Name: </label>
+                  <label className='in'>{userInfo.name}</label>
+
+                  {/* <span className="info">25</span> */}
+
+                </div>
+                <div className="info-row">
+                <label>Birth: </label>
+                <label className='in'> {userInfo.birth}</label>
+
+                {/* <span className="info">25</span> */}
+
+
+                </div>
+                <div className="info-row">
+                <label>ID: </label>
+                <label className='in'>{userInfo.id}</label>
+
+                {/* <span className="info">25</span> */}
+
+
+                  </div>
+                  <div className="info-row">
+                  <label>Phone: </label>
+                  <label className='in'>{userInfo.phone}</label>
+
+
+
+                  </div >
+                  <div className="info-row">
+                  <label>Money: </label>
+                  <label className='in'>{userInfo.money}</label>
+
+
+
+                  </div >
+                  
+                {/* <span className="info">25</span> */}
+
+                </fieldset>
+                <label>Time start: {localStorage.timeStart}</label>
+
             </div>
           ) : (
             <p>Loading user info...</p>

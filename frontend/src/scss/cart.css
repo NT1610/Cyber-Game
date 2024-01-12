@@ -46,7 +46,7 @@ button:hover{
     background-color: rgb(57, 195, 208);
 }
 .cart_box div:nth-child(3) span{
-    background-color: lightgreen;
+    background-color: rgb(123, 204, 211);
     padding: 5px 10px;
     border-radius: 5px;
     margin-right: 10px;
@@ -60,7 +60,6 @@ button:hover{
     color: black;
     font-weight: bold;
     letter-spacing: 2px;
-    color: yellow;
 }
 .total span:nth-child(2){
     font-size: 2rem;
