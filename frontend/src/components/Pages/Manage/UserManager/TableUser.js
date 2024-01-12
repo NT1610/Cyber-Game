@@ -29,11 +29,11 @@ const TableUsers =() =>{
     }
 
       return (
-          <>
+          <div className='background'>
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >List User:</span>
+            <div className='router-title' >List User:</div>
             <div className='func-button'>
               <CSVLink 
               filename={"myListAccount.csv"}
@@ -68,6 +68,7 @@ const TableUsers =() =>{
                   </th>
                   <th className='sort-header'><div>Phone</div></th>
                   <th >Birthday</th>
+                  <th>Command</th>
 
                 </tr>
               </thead>
@@ -120,7 +121,7 @@ const TableUsers =() =>{
           activeClassName="active"
           renderOnZeroPageCount={null}
           />
-          </>
+          </div>
         );
 }
 

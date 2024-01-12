@@ -8,7 +8,7 @@ import ModalEdit from './ModalEdit';
 import ModalDelete from './ModalDelete';
 import { CSVLink } from "react-csv";
 import '../../../../../scss/Table.scss'
-import style from './TableAccount.css'
+// import style from './Table.css'
 
 
 const TableAccount =() =>{
@@ -28,9 +28,10 @@ const TableAccount =() =>{
     }
 
       return (
+        <div className='background'>
         <div className='Account-container'>
           <div className="header">
-            <div className='list-account'>List Account:</div>
+            <div className='router-title'>List Account:</div>
             <div className='func-button'>
               <CSVLink 
               filename={"myListAccount.csv"}
@@ -63,6 +64,9 @@ const TableAccount =() =>{
                         Role
                       </div>
                   </th>
+                  <th>
+                    Command
+                  </th>
 
                 </tr>
               </thead>
@@ -71,9 +75,9 @@ const TableAccount =() =>{
                 originList.map((item,index) =>{
                   return(
                     <tr key={`user${index}`}>
-                        <td style={{color: '#9fffff'}}>{item.accountID}</td>
-                        <td style={{color: '#9fffff'}}>{item.account}</td>
-                        <td style={{color: '#9fffff'}}>{item.role}</td>
+                        <td className='element'>{item.accountID}</td>
+                        <td>{item.account}</td>
+                        <td>{item.role}</td>
 
                         <td>
                           <ModalEdit 
@@ -108,6 +112,7 @@ const TableAccount =() =>{
           activeClassName="active"
           renderOnZeroPageCount={null}
           />
+          </div>
           </div>
         );
 }

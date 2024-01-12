@@ -19,8 +19,8 @@ const Amazon = ({handleClick}) => {
   //     setComputers([computer, ...computers])
   //   }
   return (
-    <div>
-    <div className="container1">ĐỒ ĂN</div>
+    <div className='order-container'>
+      <div className="container1">ĐỒ ĂN</div>
     <section>
     {
       list.map((item) => {
@@ -32,7 +32,7 @@ const Amazon = ({handleClick}) => {
       })
     }
     </section>
-    <div className="container1">ĐỒ UỐNG</div>
+      <div className="container1">ĐỒ UỐNG</div>
     <section>
     {
       list.map((item) => {

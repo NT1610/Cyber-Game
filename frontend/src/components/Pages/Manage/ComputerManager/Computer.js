@@ -5,7 +5,7 @@ import active from '../../../../assets/computer/Active.png';
 import broken from '../../../../assets/computer/Broken.png';
 import ModalAddNew from './ModalAddNew';
 import ModalDelete from './ModalDelete ';
-import '../../../../scss/Table.scss'
+import '../../../../scss/Computer.scss'
 import ModalEdit from './ModalEdit';
 
 
@@ -36,8 +36,9 @@ const Computer = () => {
       //   setComputers(cloneListIsers)
       // }
     return (
+      <div className='background'>
         <Container>
-            <span >Computer List:</span>
+            <div className='router-title'>Computer List:</div>
             <div className='func-button'>
               <ModalAddNew
               handleUpdateTable={handleUpdateTable}
@@ -73,7 +74,7 @@ const Computer = () => {
             ))}
           </Row>
         </Container>
-        // <>Hello</>
+        </div>
     );
 
 }

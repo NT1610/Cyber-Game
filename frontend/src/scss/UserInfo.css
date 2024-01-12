@@ -1,0 +1,49 @@
+fieldset {
+    background-color: #eeeeee;
+  }
+  
+  legend {
+    background-color: gray;
+    color: white;
+    padding: 5px 10px;
+  }
+  
+  .user-info {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .user-info div {
+    margin-bottom: 5px;
+  }
+  
+ label {
+    font-weight: bold;
+    font-weight: bold;
+    min-width: 100px;
+    display: inline-block;
+  }
+  
+  .user-info .info {
+    margin-left: 10px;
+  }
+  div {
+    margin-bottom: 5px;
+  }
+  .user-info{
+    display: flex;
+    flex-direction: column;
+  }
+  .info {
+    margin-left: 10000px;
+  }
+  .info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .in{
+    color:rgb(208, 154, 19)
+  }

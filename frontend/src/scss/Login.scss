@@ -1,4 +1,12 @@
+.background{
+    background-image: url(https://i.ytimg.com/vi/JldMvQMO_5U/maxresdefault.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat:repeat;
+}
+
 .login-container{
+    height: 100vh;
     display: flex;
     flex-direction: column;
     margin: 0 auto;

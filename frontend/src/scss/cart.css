@@ -38,12 +38,12 @@ button{
     border:none;
     outline: none;
     color: white;
-    background-color: skyblue;
+    background-color: rgb(39, 152, 162);
     border-radius: 5px;
     cursor: pointer; 
 }
 button:hover{
-    background-color: darkseagreen;
+    background-color: rgb(57, 195, 208);
 }
 .cart_box div:nth-child(3) span{
     background-color: lightgreen;
@@ -60,6 +60,7 @@ button:hover{
     color: black;
     font-weight: bold;
     letter-spacing: 2px;
+    color: yellow;
 }
 .total span:nth-child(2){
     font-size: 2rem;
