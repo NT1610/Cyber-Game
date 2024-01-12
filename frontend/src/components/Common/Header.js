@@ -108,11 +108,12 @@ const Header=({size, setShow})=>{
                   </>
                 )}
                 {/* Employee */}
-                <NavLink className='nav-link' to="/manageAccountUser">
-                      Manage Account
-                    </NavLink>
+
                 {decoded.role === 'Employee' && (
                   <>
+                    <NavLink className='nav-link' to="/manageAccountUser">
+                      Manage Account
+                    </NavLink>
                     <NavLink className='nav-link' to="/OrderedList">
                     Orderer List
                     </NavLink>
