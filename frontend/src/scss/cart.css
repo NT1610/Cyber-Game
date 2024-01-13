@@ -60,6 +60,7 @@ button:hover{
     color: black;
     font-weight: bold;
     letter-spacing: 2px;
+    color: yellow;
 }
 .total span:nth-child(2){
     font-size: 2rem;

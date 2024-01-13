@@ -37,6 +37,7 @@ const ComputerToChoose = () => {
     }
 
     return (
+      <div className='background'>
         <Container>
 
             {/* <TurnOff userID={userID}/> */}
@@ -70,7 +71,7 @@ const ComputerToChoose = () => {
             ))}
           </Row>
         </Container>
-        // <>Hello</>
+       </div>
     );
 
 }

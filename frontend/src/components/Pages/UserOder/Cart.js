@@ -44,6 +44,7 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
             ans += item.amount * item.price
         ))
         setPrice(ans);
+        console.log(ans)
     }
 
     const handleRemove = (id) =>{
@@ -108,7 +109,7 @@ const Cart = ({cart, setCart, handleChange,account,setAccount}) => {
             setCurrentTime(new Date());
           }, 1000);
           return () => clearInterval(interval);
-    },[])
+    },[cart])
 
   return (
     <article>

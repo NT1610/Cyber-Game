@@ -17,7 +17,7 @@ import bunBoNam from "../menuImage/bunBoNamBo.jpg"
 import comChien from "../menuImage/comChien.jpg" 
 import oLong from "../menuImage/OLongVai.jpg" 
 import pepSI from "../menuImage/Pepsi.jpg"
-import style from './Home.css'
+import style from '../../../scss/Home.css'
 import LightCard from "./LightCard";
 
 

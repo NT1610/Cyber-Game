@@ -22,16 +22,16 @@ const OrderList =() =>{
     const getUsers= async()=>{
       let res = await fetchAllOrder();
       if(res){
-        setOriginList(res.sort((a, b) => ( a.orderID) - ( b.orderID)))
+        setOriginList(res.sort((b, a) => ( a.orderID) - ( b.orderID)))
       }
     }
 
       return (
-          <>
+          <div className='background'>
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >Order List:</span>
+            <div className='router-title' >Order List:</div>
             <div className='func-button'>
               <CSVLink 
               filename={"myListOrder.csv"}
@@ -70,6 +70,7 @@ const OrderList =() =>{
                   </th>
                   <th className='sort-header'><div>Order Time</div></th>
                   <th >Status</th>
+                  <th>Command</th>
 
                 </tr>
               </thead>
@@ -118,7 +119,7 @@ const OrderList =() =>{
           activeClassName="active"
           renderOnZeroPageCount={null}
           />
-          </>
+          </div>
         );
 }
 

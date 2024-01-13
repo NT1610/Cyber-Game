@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import {jwtDecode} from "jwt-decode";
 import moment from 'moment';
 import { putUpdateWork, fetchEmployee,fetchAllEmployee,fetchWork } from '../services/AdminService';
-import style from './Header.css'
+import style from '../../scss/Header.css'
 
 
 

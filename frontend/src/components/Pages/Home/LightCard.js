@@ -20,7 +20,7 @@ const LightCard = (props) => {
         onMouseOut={handleMouseOut}
         alt={alt}
         />
-        <div class={isHovered ? "text brighten" : "text"}>{alt}</div>
+        <div class={isHovered ? "text brighten" : "text" } style={{ color: "yellow" }}>{alt}</div>
     </div>
   );
 };

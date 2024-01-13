@@ -1,26 +1,34 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { postCreateAccount } from '../../../../services/AdminService';
+import { postCreateAccount,postCreateUser} from '../../../../services/AdminService';
 import { toast } from 'react-toastify';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink } from 'react-router-dom';
 
 
 const ModalAddNew = (props) => {
   const [show, setShow] = useState(false);
   const [Account,setAccount]=useState("");
-  const [Role,setRole]=useState("");
+  const [Role,setRole]=useState("User");
   const [Password,setPassword]=useState("");
+  const pickRole = "ROLE :"+Role
   const handleSaveAccount = async()=>{
   let res = await postCreateAccount(Account,Password,Role);
-
-
     console.log(">>>> check res: ",res)
     if(res&& res.accountID){
         handleClose();
         setAccount('');
-        setRole('');
+        // setRole('');
         setPassword('');
         toast.success("An Account Added")
+        if(Role=== 'User'){
+          // accountID,name,birth,id,phone,money
+          let user = await postCreateUser(res.accountID,'','2024-01-13','','',0);
+          console.log('new user added ',user)
+        }
     }
     else{
         alert('Error while saving the Account');
@@ -28,6 +36,14 @@ const ModalAddNew = (props) => {
   }
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleChooseRole = (role) => {
+    if (role === 'User') {
+      setRole('User');
+    } else if (role === 'Employee') {
+      setRole('Employee');
+    }
+  }
+  
 
   return (
     <>
@@ -51,18 +67,19 @@ const ModalAddNew = (props) => {
             />
         </div>
 
-        <div className="mb-3">
-            <label className="form-label">Role</label>
-            <input type="text"
-            className="form-control"
-            value={Role}
-            onChange={(event) => setRole(event.target.value)}
-             />
+        <div>
+        <Nav>
+                <NavDropdown title= {pickRole}>
+                <NavDropdown.Item onClick={() => handleChooseRole('User')}>User</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleChooseRole('Employee')}>Employee</NavDropdown.Item> 
+                </NavDropdown>
+              </Nav>
+
         </div>
 
         <div className="mb-3">
             <label className="form-label">Password</label>
-            <input type="text"
+            <input type="password"
             className="form-control"
             value={Password}
             onChange={(event) => setPassword(event.target.value)}

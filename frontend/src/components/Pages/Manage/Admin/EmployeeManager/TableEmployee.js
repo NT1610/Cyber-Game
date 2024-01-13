@@ -32,11 +32,11 @@ const TableEmployee =() =>{
       }
     }
       return (
-          <>
+          <div className='background'>
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >List Employee:</span>
+            <div className='router-title' >List Employee:</div>
             <div className='func-button'>
               <CSVLink 
               filename={"EmployeeList.csv"}
@@ -72,6 +72,7 @@ const TableEmployee =() =>{
                   <th >Birthday</th>
                   <th >Position</th>
                   <th >Salary</th>
+                  <th>Command</th>
 
                 </tr>
               </thead>
@@ -105,7 +106,7 @@ const TableEmployee =() =>{
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >List Work:</span>
+            <div className='router-title' >List Work:</div>
             <div className='func-button'>
               <CSVLink 
               filename={"WorkList.csv"}
@@ -162,7 +163,7 @@ const TableEmployee =() =>{
               </tbody>
             </Table>
           </div>
-          </>
+          </div>
         );
 }
 

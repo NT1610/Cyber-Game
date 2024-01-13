@@ -27,11 +27,11 @@ const Reciepts =() =>{
     }
 
       return (
-          <>
+          <div className='background'>
           <div className='col-12 col-sm-4 my-3'>
           </div>
           <div className="d-sm-flex justify-content-between">
-            <span >List Account:</span>
+            <div className='router-title' >Receipt</div>
             <div className='func-button'>
               <CSVLink 
               filename={"myListReciept.csv"}
@@ -120,7 +120,7 @@ const Reciepts =() =>{
           activeClassName="active"
           renderOnZeroPageCount={null}
           />
-          </>
+          </div>
         );
 }
 

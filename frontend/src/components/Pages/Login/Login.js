@@ -55,6 +55,7 @@ const Login = () =>{
     //   setShowIcon(!showIcon);
     // };  
     return (
+        <div className='background'>
         <div className ='login-container col-12 col-sm-4 '>
                         {/* <div className="text">Email or Username</div> */}
 
@@ -89,6 +90,7 @@ const Login = () =>{
                 <i className='fa-solid fa-angles-left'/>
                 <span onClick={handleGoBack}>    Back</span>
             </span>
+        </div>
         </div>
     )
 }
