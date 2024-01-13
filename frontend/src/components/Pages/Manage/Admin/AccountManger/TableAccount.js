@@ -23,7 +23,7 @@ const TableAccount =() =>{
     const getUsers= async()=>{
       let res = await fetchAllAccount();
       if(res){
-        setOriginList(res.sort((a, b) => a.accountID - b.accountID))
+        setOriginList(res.sort((b, a) => a.accountID - b.accountID))
       }
     }
 
