@@ -30,22 +30,16 @@ npm install
 ```
 
 ## How to use 
-### 1.Cách chạy
-###### Đồng thời tạo 2 terminal trong VsCode:
-- Terminal đầu tiên chạy front-end:
+###### ĐSimultaneously Run
+
+- Front-end run:
 ```
 cd “./front-end”
-```
-- Chạy front-end bằng lệnh:
-```
 npm start
 ```
-- Terminal thứ hai chạy sever back-end:
+- Back-end run:
 ```
 cd “./backend”
-```
-- Chạy sever back-end bằng lệnh:
-```
 uvicorn main:app –reload
 ```
 
