@@ -6,9 +6,15 @@
 - Trường: [Đại học Khoa học Tự nhiên, Đại học Quốc gia Hà Nội](http://hus.vnu.edu.vn/)
 
 ## System Design
-
-
 ![image](https://github.com/hausura/show_read_me/blob/main/Web_cyber.png)
+## Database Design
+![image](https://github.com/hausura/show_read_me/blob/main/Cyber_out3.png)
+
+
+## Product:
+![image](https://github.com/hausura/show_read_me/blob/main/Cyber_out2.png)
+![image](https://github.com/hausura/show_read_me/blob/main/Cyber_output1png.png).
+
 
 ## How to set up
 ### 1. Clone master brand
